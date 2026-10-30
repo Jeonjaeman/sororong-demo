@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>소로롱 벌룬 D안 시네마틱</title>
+<meta name="description" content="소로롱 벌룬. 영상과 입체 오브제로 보여주는 풍선 공간 스타일링.">
+<link rel="stylesheet" href="assets/common.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<style>
+:root{--bg:#f7f3ef;--ink:#17171a;--mute:#7a756f;--pink:#f49ec4;--pink-d:#e07aa9;--dark:#17171a;--line:rgba(23,23,26,.12)}
+html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto}
+body{background:var(--bg);overflow-x:hidden}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.serif-i{font-family:"Cormorant Garamond",serif;font-style:italic;font-weight:400}
+/* 로더 */
+.loader{position:fixed;inset:0;background:var(--bg);z-index:200;display:grid;place-items:center}
+.loader .num{font-family:"Cormorant Garamond",serif;font-weight:300;font-size:clamp(80px,14vw,180px);line-height:1;overflow:hidden;height:1em;display:flex}
+.loader .num .strip{display:flex;flex-direction:column;line-height:1}
+/* 헤더 */
+.hdr{position:fixed;inset:0 0 auto;z-index:50;padding:22px 0;mix-blend-mode:difference;color:#fff}
+.hdr .wrap{display:flex;justify-content:space-between;align-items:center}
+.hdr nav ul{display:flex;gap:26px}
+.hdr nav a{font-size:12px;letter-spacing:.06em}
+.hdr .right{display:flex;gap:28px;align-items:center}
+.hdr .time{display:flex;gap:10px;align-items:center}
+.hdr .time i{width:6px;height:6px;border-radius:50%;background:#7CFF9B;display:inline-block;animation:blink 1.6s infinite}
+@keyframes blink{50%{opacity:.2}}
+@media (max-width:900px){.hdr nav{display:none}.hdr .time{display:none}}
+/* 히어로 */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:120px 0 40px;position:relative;overflow:hidden}
+.hero .markwrap{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
+.hero .mark{width:min(52vh,70vw);height:auto;opacity:0}
+.hero .mark path{transform-box:fill-box;transform-origin:center}
+.hero .bottom{display:grid;grid-template-columns:1fr 1fr 1fr;align-items:end;gap:24px;position:relative;z-index:2}
+.hero h1{grid-column:1/3;font-weight:300;font-size:clamp(28px,4vw,56px);line-height:1.15;letter-spacing:-.02em}
+.hero h1 .line{display:block;overflow:hidden}
+.hero h1 em{font-family:"Cormorant Garamond",serif;font-style:italic;font-weight:400;font-size:1.15em}
+.hero .meta{text-align:right;display:grid;gap:8px;color:var(--mute)}
+.hero .brand{position:absolute;top:50%;left:50%;transform:translate(-50%,calc(min(52vh,70vw)*.56));font-size:12px;letter-spacing:.5em;margin-left:.5em;z-index:2}
+@media (max-width:900px){.hero .bottom{grid-template-columns:1fr}.hero h1{grid-column:auto}.hero .meta{text-align:left}}
+/* 영상 확장 */
+.vid{height:220vh;position:relative;background:var(--bg)}
+.vid .stick{position:sticky;top:0;height:100vh;display:grid;place-items:center;overflow:hidden}
+.vid .frame{width:40vw;height:22.5vw;border-radius:18px;overflow:hidden;position:relative;will-change:width,height;background:#000}
+.vid video,.vid img.poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vid .copy{position:absolute;inset:auto 0 0;padding:0 48px 48px;color:#fff;opacity:0;transform:translateY(20px)}
+.vid .copy h2{font-weight:300;font-size:clamp(28px,4.4vw,64px);line-height:1.1;letter-spacing:-.02em}
+.vid .copy h2 em{font-family:"Cormorant Garamond",serif;font-style:italic;font-weight:400}
+.vid .copy p{margin-top:14px;color:rgba(255,255,255,.75);font-weight:300;max-width:520px}
+.vid .label{position:absolute;top:24px;left:48px;color:rgba(255,255,255,.7)}
+@media (max-width:900px){.vid .frame{width:70vw;height:42vw}.vid .copy{padding:0 22px 26px}.vid .label{left:22px}}
+/* 프로세스 + three.js */
+.process{position:relative;background:var(--bg)}
+.process .head{padding:140px 0 40px}
+.process .head h2{font-weight:300;font-size:clamp(32px,6vw,92px);line-height:1;letter-spacing:-.03em}
+.process .head h2 em{font-family:"Cormorant Garamond",serif;font-style:italic;font-weight:400}
+.process .scene{height:320vh;position:relative}
+.process .scene .stick{position:sticky;top:0;height:100vh;overflow:hidden}
+.process canvas.gl{position:absolute;inset:0;width:100%;height:100%;display:block}
+.process .steps{position:absolute;inset:0;pointer-events:none}
+.process .step{position:absolute;left:0;right:0;top:0;bottom:0;opacity:0}
+.process .step .no{position:absolute;left:0;top:14vh}
+.process .step .tx{position:absolute;right:0;bottom:16vh;background:rgba(247,243,239,.72);backdrop-filter:blur(6px);padding:18px 20px;border-radius:14px}
+.process .step .no{font-family:"Cormorant Garamond",serif;font-size:clamp(90px,16vw,220px);font-weight:300;line-height:.9;letter-spacing:-.04em;color:var(--ink)}
+.process .step .tx{justify-self:end;max-width:420px}
+.process .step h3{font-weight:400;font-size:clamp(22px,2.4vw,32px)}
+.process .step p{margin-top:12px;color:var(--mute);font-weight:300;line-height:1.8}
+.process .bar{position:absolute;left:0;right:0;bottom:36px;height:1px;background:var(--line)}
+.process .bar i{position:absolute;left:0;top:0;height:1px;width:0;background:var(--ink)}
+@media (max-width:900px){.process .step .no{top:12vh}.process .step .tx{left:0;right:0;bottom:12vh}}
+/* 포트폴리오 스택 */
+.work{background:var(--dark);color:#fff}
+.work .stick{height:100vh;display:grid;grid-template-columns:1fr 1.2fr;gap:40px;align-items:center;overflow:hidden}
+.work .list{position:relative;z-index:2}
+.work .list .mono{color:rgba(255,255,255,.5);margin-bottom:24px}
+.work .item{display:flex;gap:18px;align-items:baseline;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.1);opacity:.28;transition:opacity .4s}
+.work .item.on{opacity:1}
+.work .item .no{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--pink)}
+.work .item h3{font-weight:300;font-size:clamp(20px,2.4vw,34px);letter-spacing:-.01em}
+.work .item small{margin-left:auto;font-size:12px;color:rgba(255,255,255,.5);white-space:nowrap}
+.work .stage{position:relative;height:72vh;max-height:760px}
+.work .stage figure{position:absolute;inset:0;overflow:hidden;clip-path:polygon(100% 100%,100% 100%,100% 100%,100% 100%)}
+.work .stage figure:first-child{clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}
+.work .stage img{width:100%;height:100%;object-fit:cover;transform:scale(1.1)}
+.work .stage figcaption{position:absolute;left:20px;bottom:18px;font-size:12px;color:rgba(255,255,255,.8);letter-spacing:.08em}
+@media (max-width:900px){.work .stick{grid-template-columns:1fr;grid-template-rows:auto 1fr;gap:16px;padding-top:80px}.work .stage{height:46vh;max-height:none}.work .item h3{font-size:18px}.work .item small{display:none}}
+/* 숫자 + 고객사 + 패키지 */
+.trust{background:var(--dark);color:#fff;padding:120px 0 100px;border-top:1px solid rgba(255,255,255,.08)}
+.odo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.odo{border-top:1px solid rgba(255,255,255,.14);padding-top:22px}
+.odo .v{display:flex;align-items:baseline;font-family:"Cormorant Garamond",serif;font-weight:300;font-size:clamp(52px,6.6vw,96px);line-height:1;letter-spacing:-.02em;height:1em;overflow:hidden}
+.odo .d{display:inline-block;height:1em;overflow:hidden}
+.odo .d span{display:block;line-height:1}
+.odo .unit{font-size:.4em;color:var(--pink);margin-left:4px;font-family:inherit}
+.odo .l{margin-top:12px;font-size:13px;color:rgba(255,255,255,.55);letter-spacing:.06em}
+@media (max-width:760px){.odo-grid{grid-template-columns:1fr 1fr}}
+.trust .marquee{margin-top:90px;border-block:1px solid rgba(255,255,255,.12);padding:26px 0}
+.marquee__track span{font-family:"Cormorant Garamond",serif;font-size:34px;letter-spacing:.06em;color:rgba(255,255,255,.7);padding:0 44px;text-transform:uppercase;white-space:nowrap}
+.marquee__track span.ko{font-family:inherit;font-size:20px;font-weight:300;letter-spacing:.12em}
+.tickets{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:90px}
+.ticket{background:#f7f3ef;color:var(--ink);border-radius:18px;padding:28px 28px 24px;position:relative;overflow:hidden;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.ticket:hover{transform:translateY(-8px) rotate(-.6deg)}
+.ticket::before,.ticket::after{content:"";position:absolute;width:28px;height:28px;border-radius:50%;background:var(--dark);top:64%;left:-14px}
+.ticket::after{left:auto;right:-14px}
+.ticket .top{display:flex;justify-content:space-between;align-items:center;color:var(--mute)}
+.ticket h3{font-weight:400;font-size:24px;margin-top:40px}
+.ticket .price{font-family:"Cormorant Garamond",serif;font-size:44px;font-weight:300;margin-top:6px}
+.ticket .price small{font-size:.4em;color:var(--mute);margin-left:6px;font-family:inherit}
+.ticket ul{margin-top:18px;display:grid;gap:8px;font-size:13.5px;color:#444;font-weight:300}
+.ticket ul li::before{content:"+ ";color:var(--pink-d)}
+.ticket .cut{border-top:1px dashed rgba(23,23,26,.3);margin:26px -28px 0;padding:16px 28px 0;display:flex;justify-content:space-between;align-items:center}
+.ticket .bar{display:flex;gap:2px;height:22px}
+.ticket .bar i{width:2px;background:#333}.ticket .bar i:nth-child(3n){width:4px}.ticket .bar i:nth-child(4n){width:1px}
+@media (max-width:900px){.tickets{grid-template-columns:1fr;max-width:460px}}
+/* 연락 */
+.contact{padding:160px 0;position:relative;overflow:hidden;background:var(--bg)}
+.contact h2{font-weight:300;font-size:clamp(30px,4.4vw,60px);line-height:1.15;text-align:center;letter-spacing:-.02em}
+.contact h2 em{font-family:"Cormorant Garamond",serif;font-style:italic;font-weight:400}
+.contact .string{position:relative;height:260px;margin-top:40px}
+.contact .string::before{content:"";position:absolute;left:0;right:0;top:50%;border-top:1px dashed rgba(23,23,26,.35)}
+.balloon{position:absolute;left:50%;top:50%;width:150px;height:150px;transform:translate(-50%,-50%);display:grid;place-items:center;color:#fff;font-size:14px;letter-spacing:.06em;cursor:pointer;transform-origin:50% 120%;animation:sway 5s ease-in-out infinite}
+.balloon::before{content:"";position:absolute;inset:0;background:var(--pink);border-radius:50% 50% 50% 50%/55% 55% 45% 45%;box-shadow:inset -18px -14px 30px rgba(0,0,0,.12),inset 14px 14px 30px rgba(255,255,255,.35)}
+.balloon::after{content:"";position:absolute;bottom:-10px;left:50%;width:14px;height:14px;background:var(--pink);transform:translateX(-50%) rotate(45deg)}
+.balloon span{position:relative}
+.balloon:hover{animation-duration:1.2s}
+@keyframes sway{0%,100%{transform:translate(-50%,-50%) rotate(-4deg)}50%{transform:translate(-50%,-50%) rotate(4deg)}}
+.contact .btns{display:flex;justify-content:center;gap:12px;margin-top:30px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;border:1px solid var(--ink);font-size:13px;letter-spacing:.08em;transition:.3s}
+.btn:hover{background:var(--ink);color:#fff}
+.btn.kakao{background:#fee500;border-color:#fee500;color:#191919}.btn.kakao:hover{background:#ffd900}
+.btn svg{width:16px;height:16px}
+/* 푸터 */
+footer{background:var(--pink);color:var(--ink);padding:60px 0 0;overflow:hidden}
+footer .cols{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;font-size:13px}
+footer .cols b{display:block;font-weight:500;margin-bottom:10px}
+footer .cols a{display:block;margin-top:6px;opacity:.75}
+footer .big{margin-top:60px;display:flex;justify-content:center}
+footer .big img{width:min(34vw,320px);transform:translateY(12%)}
+@media (max-width:760px){footer .cols{grid-template-columns:1fr 1fr}}
+.draftbar a[href="d.html"],.draftbar a[href="e.html"]{display:inline-block}
+</style>
+</head>
+<body>
+<div class="loader" aria-hidden="true"><div class="num"><div class="strip" id="odoLoad"></div><span>%</span></div></div>
+
+<header class="hdr">
+  <div class="wrap">
+    <a href="#" class="mono">sororong balloon</a>
+    <nav><ul>
+      <li><a href="#work">기업·학교행사</a></li><li><a href="#work">돌잔치·헬륨풍선</a></li><li><a href="#work">꽃풍선·자이언트플라워</a></li><li><a href="#work">실사물제작</a></li><li><a href="#work">행사장비렌탈</a></li>
+    </ul></nav>
+    <div class="right">
+      <span class="mono time"><i></i>시즌 예약 가능</span>
+      <a href="#contact" class="mono">상담문의</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="markwrap"><img class="mark" id="heroMark" src="assets/logo/mark.svg" alt="소로롱 벌룬 로고"></div>
+  <div class="brand mono">sororong</div>
+  <div class="wrap bottom">
+    <h1 id="heroH1"><span class="line">특별한 날을 <em>더 특별하게</em></span><span class="line">풍선으로 완성하는 공간 스타일링</span></h1>
+    <div class="meta mono"><span>경기 광주 · 전국 출장</span><span id="clock">LOCAL TIME 00:00:00</span></div>
+  </div>
+</section>
+
+<section class="vid" id="vid">
+  <div class="stick">
+    <div class="frame" id="frame">
+      <img class="poster" src="assets/hf/00_hero_dark.webp" alt="">
+      <video id="heroVideo" muted loop playsinline preload="metadata" poster="assets/hf/00_hero_dark.webp"><source src="assets/hf/hero_dark.mp4" type="video/mp4"></video>
+      <div class="label mono">Film · Ballroom installation</div>
+      <div class="copy" id="vidCopy">
+        <h2>사진으로 남아도 <em>예쁜 현장</em></h2>
+        <p>기업 시상식, 브랜드 팝업, 돌잔치까지. 브랜드 색과 공간에 맞춰 풍선으로 스타일링하고 현장에서 직접 마무리합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="process" id="process">
+  <div class="wrap head">
+    <div class="mono" style="color:var(--mute);margin-bottom:18px">Process</div>
+    <h2>상담 + 디자인 + 설치 = <em>하나의 장면</em></h2>
+  </div>
+  <div class="scene" id="scene">
+    <div class="stick">
+      <canvas class="gl" id="gl"></canvas>
+      <div class="steps wrap">
+        <div class="step"><div class="no">01</div><div class="tx"><h3>상담</h3><p>행사 날짜, 장소, 참고 사진을 받고 공간 규모와 동선을 확인합니다. 카카오톡 채널이 가장 빠릅니다.</p></div></div>
+        <div class="step"><div class="no">02</div><div class="tx"><h3>디자인</h3><p>브랜드 컬러와 행사 목적에 맞춰 색 조합, 포토월 크기, 오브제 배치를 제안드립니다.</p></div></div>
+        <div class="step"><div class="no">03</div><div class="tx"><h3>설치</h3><p>행사 전날 또는 당일 새벽 현장 설치. 사진이 잘 나오는 조명 위치까지 함께 봅니다.</p></div></div>
+        <div class="step"><div class="no">04</div><div class="tx"><h3>철거</h3><p>행사가 끝나면 깔끔하게 철거합니다. 재사용 가능한 오브제는 다음 행사에 다시 씁니다.</p></div></div>
+      </div>
+      <div class="bar wrap"><i id="procBar"></i></div>
+    </div>
+  </div>
+</section>
+
+<section class="work" id="work">
+  <div class="wrap stick">
+    <div class="list">
+      <div class="mono">Selected work · 분류</div>
+      <a class="item on" href="#"><span class="no">01</span><h3>기업 · 학교행사</h3><small>시상식 · 창립기념 · 팝업</small></a>
+      <a class="item" href="#"><span class="no">02</span><h3>돌잔치 · 헬륨풍선</h3><small>가족 행사 · 파티</small></a>
+      <a class="item" href="#"><span class="no">03</span><h3>꽃풍선 · 자이언트플라워</h3><small>개업 · 벌룬화환</small></a>
+      <a class="item" href="#"><span class="no">04</span><h3>실사물제작</h3><small>백월 · 현수막 · 입간판</small></a>
+      <a class="item" href="#"><span class="no">05</span><h3>행사장비렌탈</h3><small>레드카펫 · 천막 · 단상</small></a>
+      <a class="item" href="#contact"><span class="no">06</span><h3>상담문의</h3><small>견적 · 일정</small></a>
+    </div>
+    <div class="stage" id="stage">
+      <figure><img src="assets/hf/02_corporate.webp" alt=""><figcaption>CORPORATE · AWARDS STAGE</figcaption></figure>
+      <figure><img src="assets/hf/06_birthday.webp" alt=""><figcaption>FIRST BIRTHDAY</figcaption></figure>
+      <figure><img src="assets/hf/07_giant_flower.webp" alt=""><figcaption>GIANT FLOWER · GRAND OPENING</figcaption></figure>
+      <figure><img src="assets/photos/p02.jpg" alt=""><figcaption>PRINT · BACK WALL</figcaption></figure>
+      <figure><img src="assets/hf/08_outdoor.webp" alt=""><figcaption>RENTAL · OUTDOOR FESTIVAL</figcaption></figure>
+      <figure><img src="assets/hf/03_macro.webp" alt=""><figcaption>LET'S TALK</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="trust">
+  <div class="wrap">
+    <div class="mono" style="color:rgba(255,255,255,.5);margin-bottom:40px">Numbers</div>
+    <div class="odo-grid">
+      <div class="odo"><div class="v" data-odo="2000"></div><div class="l">누적 풍선 제작</div></div>
+      <div class="odo"><div class="v" data-odo="300"></div><div class="l">행사 장식 완료</div></div>
+      <div class="odo"><div class="v" data-odo="7" data-unit="년"></div><div class="l">현장 경험</div></div>
+      <div class="odo"><div class="v" data-odo="4.9"></div><div class="l">고객 만족도</div></div>
+    </div>
+    <div class="marquee" aria-label="고객사"><div class="marquee__track">
+      <span>Starbucks</span><span>Nike</span><span>Lacoste</span><span>Levi's</span><span>Coway</span><span>Fila</span><span>Mokkozi</span><span>Kalisan</span><span>CCP</span><span class="ko">아산병원</span><span class="ko">인천광역시</span><span class="ko">대구·경북</span>
+    </div></div>
+    <div class="mono" style="color:rgba(255,255,255,.5);margin-top:90px">Packages · 예시</div>
+    <div class="tickets">
+      <div class="ticket"><div class="top mono"><span>No. 01</span><span>Family</span></div><h3>돌잔치 · 홈파티</h3><div class="price">문의<small>규모별</small></div><ul><li>헬륨 풍선 + 가랜드</li><li>테이블 오브제</li><li>당일 설치</li></ul><div class="cut"><span class="mono">sororong</span><span class="bar"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div></div>
+      <div class="ticket"><div class="top mono"><span>No. 02</span><span>Corporate</span></div><h3>기업 포토월</h3><div class="price">문의<small>규모별</small></div><ul><li>브랜드 컬러 포토월</li><li>백월 실사 제작</li><li>설치 + 철거</li></ul><div class="cut"><span class="mono">sororong</span><span class="bar"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div></div>
+      <div class="ticket"><div class="top mono"><span>No. 03</span><span>Full</span></div><h3>행사 풀 세팅</h3><div class="price">문의<small>규모별</small></div><ul><li>입구 아치 + 포토월 + 무대</li><li>장비 렌탈 포함</li><li>현장 상주</li></ul><div class="cut"><span class="mono">sororong</span><span class="bar"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <h2>행사 날짜와 장소를 알려주세요<br><em>어울리는 연출</em>을 제안드릴게요</h2>
+    <div class="string"><a class="balloon" href="#"><span>LET'S TALK</span></a></div>
+    <div class="btns">
+      <a class="btn kakao" href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.8 5.2 4.6 6.6L5.6 21l4.2-2.7c.7.1 1.4.2 2.2.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg>카카오톡 채널</a>
+      <a class="btn" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>인스타그램</a>
+      <a class="btn" href="tel:"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>전화 문의</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div><b>sororong balloon</b>경기도 광주시<br>전국 출장 가능</div>
+      <div><b>Services</b><a href="#">기업·학교행사</a><a href="#">돌잔치·헬륨풍선</a><a href="#">꽃풍선·자이언트플라워</a></div>
+      <div><b>More</b><a href="#">실사물제작</a><a href="#">행사장비렌탈</a><a href="#contact">상담문의</a></div>
+      <div><b>Social</b><a href="#">Instagram</a><a href="#">KakaoTalk Channel</a><a href="tel:">Phone</a></div>
+    </div>
+    <div class="big"><img src="assets/logo/mark-mono.svg" alt=""></div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+<script src="assets/common.js"></script>
+<script>
+(function(){
+  gsap.registerPlugin(ScrollTrigger);
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var mobile = matchMedia('(max-width: 900px)').matches;
+  // Lenis
+  var lenis = new Lenis({ lerp: mobile ? .3 : .08, smoothWheel: true });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add(function(t){ lenis.raf(t*1000); }); gsap.ticker.lagSmoothing(0);
+
+  // 로더 오도미터 0→100
+  var strip = document.getElementById('odoLoad');
+  for (var i=0;i<=100;i+=10) { var s=document.createElement('span'); s.textContent=i; strip.appendChild(s); }
+  var tl = gsap.timeline({ onComplete: function(){ document.querySelector('.loader').remove(); } });
+  tl.to(strip, { yPercent: -100 * (10/11), duration: reduce? .2 : 1.4, ease: 'power2.inOut' })
+    .to('.loader', { yPercent: -100, duration: .8, ease: 'power3.inOut' }, '+=.1');
+  // 히어로: 문양 낙하 + 카피 blur 리빌
+  tl.fromTo('#heroMark', { y: -260, opacity: 0, scale: .92 }, { y: 0, opacity: 1, scale: 1, duration: 1.6, ease: 'power3.out' }, '-=.5')
+    .fromTo('#heroH1 .line', { opacity: 0, y: 18, filter: 'blur(10px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: .7, stagger: .14 }, '-=1')
+    .fromTo('.hero .meta, .hero .brand', { opacity: 0 }, { opacity: 1, duration: .6 }, '-=.4');
+  // 시계
+  function clock(){ var d=new Date(); document.getElementById('clock').textContent='LOCAL TIME '+d.toTimeString().slice(0,8); } clock(); setInterval(clock,1000);
+  // 히어로 시차 퇴장
+  gsap.to('#heroMark', { y: -160, scale: .9, opacity: .25, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+
+  // 영상 확장
+  var video = document.getElementById('heroVideo');
+  video.addEventListener('canplay', function(){ document.querySelector('.vid .poster').style.opacity = 0; });
+  gsap.timeline({ scrollTrigger: { trigger: '#vid', start: 'top top', end: '+=120%', scrub: .4,
+      onEnter: function(){ video.play().catch(function(){}); }, onEnterBack: function(){ video.play().catch(function(){}); } } })
+    .to('#frame', { width: '100vw', height: '100vh', borderRadius: 0, ease: 'none' })
+    .to('#vidCopy', { opacity: 1, y: 0, duration: .4 }, '-=.25');
+
+  // 프로세스: three.js 미러볼 + 단계 교체
+  var steps = gsap.utils.toArray('.process .step'), N = steps.length;
+  var sceneProg = { p: 0 };
+  ScrollTrigger.create({ trigger: '#scene', start: 'top top', end: 'bottom bottom', scrub: true,
+    onUpdate: function(self){ sceneProg.p = self.progress; document.getElementById('procBar').style.width = (self.progress*100)+'%';
+      var k = Math.min(N-1, Math.floor(self.progress * N));
+      steps.forEach(function(st, i){ var local = self.progress*N - i; var o = i===k ? 1 : 0;
+        gsap.set(st, { opacity: o, y: i===k ? (1-Math.min(1,local*4))*20 : 0 }); });
+    } });
+
+  // 포트폴리오 클립패스 스택
+  var figs = gsap.utils.toArray('#stage figure'), items = gsap.utils.toArray('.work .item');
+  var wtl = gsap.timeline({ scrollTrigger: { trigger: '.work', start: 'top top', end: '+=' + (figs.length*90) + '%', pin: true, scrub: .5,
+      snap: { snapTo: 1/(figs.length-1), duration: .4, ease: 'power2.inOut' },
+      onUpdate: function(self){ var k = Math.round(self.progress*(figs.length-1)); items.forEach(function(it,i){ it.classList.toggle('on', i===k); }); } } });
+  figs.forEach(function(f, i){ if (i===0) { wtl.to(f.querySelector('img'), { scale: 1, duration: 1 }); return; }
+    wtl.addLabel('s'+i)
+       .to(figs[i-1].querySelector('img'), { scale: 1.2, duration: 1 }, 's'+i)
+       .to(f, { clipPath: 'polygon(0 0,100% 0,100% 100%,0 100%)', duration: 1, ease: 'power2.inOut' }, 's'+i)
+       .to(f.querySelector('img'), { scale: 1, duration: 1 }, 's'+i); });
+
+  // 오도미터 숫자
+  document.querySelectorAll('[data-odo]').forEach(function(el){
+    var v = el.dataset.odo, unit = el.dataset.unit || (v.indexOf('.')<0 && v.length>1 ? '+' : '');
+    v.split('').forEach(function(ch){
+      if (ch === '.') { var dot=document.createElement('span'); dot.textContent='.'; el.appendChild(dot); return; }
+      var d=document.createElement('span'); d.className='d'; var col=document.createElement('span');
+      for (var n=0;n<=9;n++){ var s=document.createElement('span'); s.textContent=n; col.appendChild(s); }
+      d.appendChild(col); el.appendChild(d); d.dataset.n = ch;
+    });
+    if (unit) { var u=document.createElement('span'); u.className='unit'; u.textContent=unit; el.appendChild(u); }
+    ScrollTrigger.create({ trigger: el, start: 'top 85%', once: true, onEnter: function(){
+      el.querySelectorAll('.d').forEach(function(d, i){ gsap.fromTo(d.firstChild, { yPercent: 0 }, { yPercent: -10*parseInt(d.dataset.n,10), duration: 1.6 + i*.15, ease: 'power3.out' }); }); } });
+  });
+
+  // three.js 미러볼 (모듈)
+  if (!reduce) {
+    var s = document.createElement('script'); s.type = 'module';
+    s.textContent = "import * as THREE from 'three';" +
+    "const c=document.getElementById('gl');const r=new THREE.WebGLRenderer({canvas:c,antialias:true,alpha:true});r.setPixelRatio(Math.min(devicePixelRatio,1.5));" +
+    "const sc=new THREE.Scene();const cam=new THREE.PerspectiveCamera(32,1,.1,100);cam.position.set(0,0,innerWidth<900?14:9);" +
+    "const pm=new THREE.PMREMGenerator(r);new THREE.TextureLoader().load('assets/hf/00_hero_dark.webp',t=>{t.mapping=THREE.EquirectangularReflectionMapping;t.colorSpace=THREE.SRGBColorSpace;sc.environment=pm.fromEquirectangular(t).texture;t.dispose()});" +
+    "const mat=new THREE.MeshPhysicalMaterial({color:0xffffff,metalness:1,roughness:.08,envMapIntensity:1.6});" +
+    "const pink=new THREE.MeshPhysicalMaterial({color:0xfbb9d6,metalness:0,roughness:.32,clearcoat:.9,clearcoatRoughness:.15,envMapIntensity:.55});" +
+    "const gold=new THREE.MeshPhysicalMaterial({color:0xd9b56a,metalness:1,roughness:.2,envMapIntensity:1.4});" +
+    "const g=new THREE.SphereGeometry(1,96,96);const balls=[];" +
+    "[[0,0,0,1.35,mat],[-2.8,1.4,-1.5,.6,pink],[2.7,-1.2,-1,.5,gold],[2.1,1.8,-2.2,.4,pink],[-2.4,-1.7,-.6,.45,mat]].forEach(a=>{const m=new THREE.Mesh(g,a[4]);m.position.set(a[0],a[1],a[2]);m.scale.setScalar(a[3]);m.userData={b:a.slice(0,3)};sc.add(m);balls.push(m)});" +
+    "const l=new THREE.DirectionalLight(0xfff1e0,.8);l.position.set(3,4,5);sc.add(l);sc.add(new THREE.AmbientLight(0xffffff,.25));" +
+    "function rs(){const w=c.clientWidth,h=c.clientHeight;r.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()}addEventListener('resize',rs);rs();" +
+    "let cur=0,mx=0,my=0;addEventListener('pointermove',e=>{mx=(e.clientX/innerWidth-.5);my=(e.clientY/innerHeight-.5)});" +
+    "function tick(t){cur+=(window.__sp.p-cur)*.12;const m=balls[0];m.rotation.y=cur*Math.PI*2;m.rotation.x=cur*1.2;m.position.x=Math.sin(cur*Math.PI*2)*1.6;m.position.y=Math.cos(cur*Math.PI*2)*.5+(innerWidth<900?.8:0);" +
+    "balls.slice(1).forEach((b,i)=>{const o=b.userData.b;b.position.x=o[0]+Math.sin(t*.0006+i)*.25+mx*.6;b.position.y=o[1]+Math.cos(t*.0005+i*1.3)*.25-my*.6});" +
+    "cam.position.x+=((mx*.8)-cam.position.x)*.05;cam.position.y+=((-my*.6)-cam.position.y)*.05;cam.lookAt(0,0,0);r.render(sc,cam);requestAnimationFrame(tick)}requestAnimationFrame(tick);";
+    window.__sp = sceneProg; document.body.appendChild(s);
+  }
+})();
+</script>
+</body>
+</html>
