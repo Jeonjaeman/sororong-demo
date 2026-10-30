@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>소로롱 벌룬 A안 화이트 갤러리</title>
+<meta name="description" content="기업·학교 행사, 돌잔치, 꽃풍선까지. 소로롱 벌룬의 공간 스타일링 포트폴리오.">
+<link rel="stylesheet" href="assets/common.css">
+<style>
+:root{--bg:#fff;--ink:#161616;--mute:#7a7a7a;--line:#e9e6e3;--pink:#f49ec4;--pinkbg:#fdf2f6}
+/* 헤더 */
+.hdr{position:fixed;inset:0 0 auto;z-index:50;transition:background .4s,box-shadow .4s}
+.hdr.scrolled{background:rgba(255,255,255,.92);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--line)}
+.hdr .wrap{display:flex;align-items:center;justify-content:space-between;height:72px}
+.brand{display:flex;align-items:center;gap:10px;font-size:13px;letter-spacing:.32em;text-transform:lowercase;font-weight:500}
+.brand img{height:30px;width:auto}
+.nav ul{display:flex;gap:34px;font-size:13px;letter-spacing:.04em;color:#333}
+.nav a{position:relative;padding:6px 0}
+.nav a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;background:var(--ink);transition:right .35s}
+.nav a:hover::after{right:0}
+.cta{font-size:12px;letter-spacing:.14em;border:1px solid var(--ink);padding:10px 20px;border-radius:999px;transition:.3s}
+.cta:hover{background:var(--ink);color:#fff}
+.menu-btn{display:none;width:40px;height:40px;position:relative}
+.menu-btn span{position:absolute;left:9px;right:9px;height:1px;background:var(--ink);top:14px}
+.menu-btn span+span{top:20px}.menu-btn span+span+span{top:26px}
+@media (max-width:900px){
+  .nav{position:fixed;inset:0;background:#fff;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .35s}
+  .nav.open{opacity:1;pointer-events:auto}
+  .nav ul{flex-direction:column;gap:22px;text-align:center;font-size:20px;font-weight:300}
+  .menu-btn{display:block;position:relative;z-index:60}
+  .cta{display:none}
+}
+/* 히어로 */
+.hero{min-height:100svh;display:grid;place-items:center;text-align:center;padding:120px 24px 60px}
+.hero .mark{width:clamp(150px,22vw,250px);margin:0 auto 34px;animation:float 7s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-10px)}}
+.hero .name{font-size:clamp(14px,1.4vw,17px);letter-spacing:.5em;text-transform:lowercase;font-weight:400;margin-left:.5em}
+.hero .sub{font-size:10px;letter-spacing:.42em;color:var(--mute);margin:8px 0 38px;margin-left:.42em}
+.hero h1{font-weight:300;font-size:clamp(22px,3vw,38px);line-height:1.45;letter-spacing:-.01em}
+.hero h1 em{font-style:normal;font-family:"Cormorant Garamond",serif;font-style:italic;font-weight:400;font-size:1.15em}
+.hero p{margin-top:16px;color:var(--mute);font-size:15px;font-weight:300}
+.scroll{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:.3em;color:var(--mute)}
+.scroll::after{content:"";display:block;width:1px;height:38px;margin:10px auto 0;background:linear-gradient(#999,transparent);animation:drop 2s infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.hero{position:relative}
+/* 라벨 */
+.eyebrow{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--mute);display:flex;align-items:center;gap:14px}
+.eyebrow::before{content:"";width:28px;height:1px;background:#cfcac6}
+.h2{font-weight:300;font-size:clamp(26px,3.2vw,40px);line-height:1.3;margin-top:14px;letter-spacing:-.01em}
+.h2 em{font-family:"Cormorant Garamond",serif;font-style:italic;font-weight:400;font-size:1.18em}
+section{padding:110px 0}
+@media (max-width:720px){section{padding:72px 0}}
+/* 메이슨리 갤러리 */
+.gallery{padding-top:0}
+.masonry{columns:3;column-gap:14px}
+.masonry a{display:block;break-inside:avoid;margin-bottom:14px;position:relative;overflow:hidden;background:#f3f1ef}
+.masonry img{width:100%;transition:transform 1.4s cubic-bezier(.2,.7,.2,1)}
+.masonry a:hover img{transform:scale(1.04)}
+.masonry .tag{position:absolute;left:14px;bottom:12px;color:#fff;font-size:11px;letter-spacing:.2em;opacity:0;transform:translateY(6px);transition:.4s;text-shadow:0 1px 10px rgba(0,0,0,.4)}
+.masonry a:hover .tag{opacity:1;transform:none}
+@media (max-width:900px){.masonry{columns:2}}
+/* 분류 */
+.cats{border-top:1px solid var(--line)}
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px 24px;margin-top:56px}
+.cat{display:block}
+.cat .ph{aspect-ratio:4/5;overflow:hidden;background:#f3f1ef}
+.cat img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s cubic-bezier(.2,.7,.2,1)}
+.cat:hover img{transform:scale(1.05)}
+.cat .no{font-family:"Cormorant Garamond",serif;font-size:13px;letter-spacing:.2em;color:var(--mute);margin-top:18px}
+.cat h3{font-weight:400;font-size:18px;margin-top:4px}
+.cat p{font-size:13.5px;color:var(--mute);margin-top:6px;font-weight:300}
+@media (max-width:900px){.cat-grid{grid-template-columns:1fr 1fr;gap:32px 16px}}
+@media (max-width:520px){.cat-grid{grid-template-columns:1fr 1fr}.cat h3{font-size:15px}.cat p{display:none}}
+/* 숫자 */
+.stats{background:var(--pinkbg);padding:80px 0}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);text-align:center}
+.stat b{display:block;font-family:"Cormorant Garamond",serif;font-weight:300;font-size:clamp(44px,5.4vw,72px);line-height:1;letter-spacing:-.02em}
+.stat b small{font-size:.5em;vertical-align:baseline;margin-left:2px}
+.stat > span{display:block;margin-top:10px;font-size:13px;color:#6b6b6b;letter-spacing:.06em}
+@media (max-width:720px){.stat-grid{grid-template-columns:1fr 1fr;gap:36px 0}}
+/* 고객사 */
+.clients{padding:70px 0;border-bottom:1px solid var(--line)}
+.clients .eyebrow{justify-content:center}.clients .eyebrow::before{display:none}
+.marquee{margin-top:36px}
+.marquee__track span{font-family:"Cormorant Garamond",serif;font-size:30px;font-weight:400;letter-spacing:.06em;color:#9a9a9a;padding:0 44px;text-transform:uppercase;white-space:nowrap}
+.marquee__track span.ko{font-family:inherit;font-size:20px;font-weight:300;letter-spacing:.12em}
+/* 소개 */
+.about .grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.about .ph{aspect-ratio:4/5;overflow:hidden}
+.about img{width:100%;height:100%;object-fit:cover}
+.about p{margin-top:22px;color:#444;font-weight:300;font-size:15.5px;line-height:1.9}
+.about .pts{margin-top:30px;display:grid;gap:14px}
+.about .pts li{display:flex;gap:14px;font-size:14px;color:#333}
+.about .pts li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--pink);margin-top:9px;flex:none}
+@media (max-width:860px){.about .grid{grid-template-columns:1fr;gap:36px}}
+/* 문의 */
+.contact{text-align:center;background:#161616;color:#fff;padding:120px 0}
+.contact .mark{width:72px;margin:0 auto 28px}
+.contact h2{font-weight:300;font-size:clamp(26px,3.4vw,42px);line-height:1.35}
+.contact p{color:#aaa;margin-top:14px;font-weight:300}
+.btns{display:flex;justify-content:center;gap:12px;margin-top:40px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;border:1px solid #555;font-size:13px;letter-spacing:.08em;transition:.3s}
+.btn:hover{background:#fff;color:#111;border-color:#fff}
+.btn.kakao{background:#fee500;color:#191919;border-color:#fee500}.btn.kakao:hover{background:#ffd900}
+.btn svg{width:16px;height:16px}
+/* 푸터 */
+footer{padding:40px 0;font-size:12px;color:var(--mute)}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+</style>
+</head>
+<body>
+<header class="hdr" data-header>
+  <div class="wrap">
+    <a class="brand" href="#"><img src="assets/logo/mark-mono.svg" alt="">sororong</a>
+    <nav class="nav" data-nav aria-label="주 메뉴">
+      <ul>
+        <li><a href="#cats">기업·학교행사</a></li>
+        <li><a href="#cats">돌잔치·헬륨풍선</a></li>
+        <li><a href="#cats">꽃풍선·자이언트플라워</a></li>
+        <li><a href="#cats">실사물제작</a></li>
+        <li><a href="#cats">행사장비렌탈</a></li>
+        <li><a href="#contact">상담문의</a></li>
+      </ul>
+    </nav>
+    <a class="cta" href="#contact">상담문의</a>
+    <button class="menu-btn" data-menu-btn aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="hero">
+  <div>
+    <img class="mark" src="assets/logo/mark.svg" alt="소로롱 벌룬 로고">
+    <div class="name">sororong</div>
+    <div class="sub">BALLOON</div>
+    <h1 class="reveal">특별한 날을 <em>더 특별하게</em><br>풍선으로 완성하는 공간 스타일링</h1>
+    <p class="reveal" data-delay="1">기업 행사부터 돌잔치까지, 사진으로 남아도 예쁜 현장을 만듭니다.</p>
+  </div>
+  <div class="scroll">SCROLL</div>
+</section>
+
+<section class="gallery">
+  <div class="wrap">
+    <div class="masonry">
+      <a href="#" class="reveal"><img src="assets/photos/p23.jpg" alt="모꼬지 2주년 실버 포토월"><span class="tag">CORPORATE</span></a>
+      <a href="#" class="reveal" data-delay="1"><img src="assets/photos/p04.jpg" alt="스타벅스 팝업 풍선 장식"><span class="tag">BRAND POP-UP</span></a>
+      <a href="#" class="reveal" data-delay="2"><img src="assets/photos/p34.jpg" alt="미러볼 오브제"><span class="tag">OUTDOOR</span></a>
+      <a href="#" class="reveal"><img src="assets/photos/p28.jpg" alt="골드 시퀸 포토월"><span class="tag">YEAR END</span></a>
+      <a href="#" class="reveal" data-delay="1"><img src="assets/photos/p36.jpg" alt="칼리산 파스텔 포토월"><span class="tag">BRAND</span></a>
+      <a href="#" class="reveal" data-delay="2"><img src="assets/photos/p24.jpg" alt="자이언트 플라워 장식"><span class="tag">GIANT FLOWER</span></a>
+      <a href="#" class="reveal"><img src="assets/photos/p06.jpg" alt="라코스테 매장 풍선 기둥"><span class="tag">RETAIL</span></a>
+      <a href="#" class="reveal" data-delay="1"><img src="assets/photos/p21.jpg" alt="창립 20주년 기념식"><span class="tag">ANNIVERSARY</span></a>
+      <a href="#" class="reveal" data-delay="2"><img src="assets/photos/p27.jpg" alt="연말 파티 실버 포토월"><span class="tag">PARTY</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="cats" id="cats">
+  <div class="wrap">
+    <div class="eyebrow reveal">Services</div>
+    <h2 class="h2 reveal" data-delay="1">행사 성격에 맞춰 <em>고르세요</em></h2>
+    <div class="cat-grid">
+      <a class="cat reveal" href="#"><div class="ph"><img src="assets/photos/p20.jpg" alt=""></div><div class="no">01</div><h3>기업 · 학교행사</h3><p>시상식, 창립기념, 팝업스토어, 입학·졸업식 포토월</p></a>
+      <a class="cat reveal" data-delay="1" href="#"><div class="ph"><img src="assets/photos/p31.jpg" alt=""></div><div class="no">02</div><h3>돌잔치 · 헬륨풍선</h3><p>가족 행사와 파티를 위한 헬륨 풍선 연출</p></a>
+      <a class="cat reveal" data-delay="2" href="#"><div class="ph"><img src="assets/photos/p24.jpg" alt=""></div><div class="no">03</div><h3>꽃풍선 · 자이언트플라워 · 벌룬화환</h3><p>개업, 축하, 공간 포인트가 되는 대형 오브제</p></a>
+      <a class="cat reveal" href="#"><div class="ph"><img src="assets/photos/p02.jpg" alt=""></div><div class="no">04</div><h3>실사물제작</h3><p>현수막, 백월, 입간판 등 행사 인쇄물 일괄 제작</p></a>
+      <a class="cat reveal" data-delay="1" href="#"><div class="ph"><img src="assets/photos/p38.jpg" alt=""></div><div class="no">05</div><h3>행사장비렌탈</h3><p>레드카펫, 천막, 테이블, 단상 등 현장 장비</p></a>
+      <a class="cat reveal" data-delay="2" href="#contact"><div class="ph"><img src="assets/photos/p10.jpg" alt=""></div><div class="no">06</div><h3>상담문의</h3><p>행사 일정과 공간 사진을 보내주시면 견적을 드립니다</p></a>
+    </div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="wrap stat-grid">
+    <div class="stat reveal"><b><span data-count="2000">0</span><small>+</small></b><span>누적 풍선 제작</span></div>
+    <div class="stat reveal" data-delay="1"><b><span data-count="300">0</span><small>+</small></b><span>행사 장식 완료</span></div>
+    <div class="stat reveal" data-delay="2"><b><span data-count="7">0</span><small>년</small></b><span>현장 경험</span></div>
+    <div class="stat reveal" data-delay="3"><b><span data-count="4.9">0</span></b><span>고객 만족도</span></div>
+  </div>
+</section>
+
+<section class="clients">
+  <div class="wrap">
+    <div class="eyebrow">함께한 고객사</div>
+  </div>
+  <div class="marquee" aria-label="고객사 목록">
+    <div class="marquee__track">
+      <span>Starbucks</span><span>Nike</span><span>Lacoste</span><span>Levi's</span><span>Coway</span><span>Fila</span><span>Mokkozi</span><span>Kalisan</span><span>CCP</span><span class="ko">아산병원</span><span class="ko">인천광역시</span><span class="ko">대구·경북</span>
+    </div>
+  </div>
+</section>
+
+<section class="about">
+  <div class="wrap grid">
+    <div class="ph reveal"><img src="assets/photos/p28.jpg" alt="골드 시퀸 포토월 현장"></div>
+    <div>
+      <div class="eyebrow reveal">About</div>
+      <h2 class="h2 reveal" data-delay="1">사진으로 남아도<br><em>예쁜 현장</em>을 만듭니다</h2>
+      <p class="reveal" data-delay="2">소로롱 벌룬은 경기 광주를 기반으로 기업과 기관, 학교, 가족 행사의 공간을 풍선으로 스타일링합니다. 브랜드 색과 행사 목적에 맞춰 디자인하고, 설치부터 철거까지 현장에서 직접 마무리합니다.</p>
+      <ul class="pts reveal" data-delay="3">
+        <li>브랜드 컬러에 맞춘 맞춤 디자인 제안</li>
+        <li>포토월, 입구 아치, 테이블 오브제까지 일괄 연출</li>
+        <li>서울·경기 기반, 전국 출장 가능</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <img class="mark" src="assets/logo/mark-white.svg" alt="">
+    <h2 class="reveal">행사 날짜와 장소를 알려주세요<br>어울리는 연출을 제안드릴게요</h2>
+    <p class="reveal" data-delay="1">카카오톡 채널이 가장 빠릅니다. 사진 참고안을 함께 보내주시면 견적이 더 정확해져요.</p>
+    <div class="btns reveal" data-delay="2">
+      <a class="btn kakao" href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.8 5.2 4.6 6.6L5.6 21l4.2-2.7c.7.1 1.4.2 2.2.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg>카카오톡 채널</a>
+      <a class="btn" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>인스타그램</a>
+      <a class="btn" href="tel:"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>전화 문의</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>sororong balloon · 경기도 광주시</div>
+    <div>© 2026 Sororong Balloon. All rights reserved.</div>
+  </div>
+</footer>
+<script src="assets/common.js"></script>
+</body>
+</html>

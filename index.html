@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>소로롱 벌룬 홈페이지 초안 3안</title>
+<link rel="stylesheet" href="assets/common.css">
+<style>
+:root{--bg:#f7f6f4;--ink:#161616}
+body{padding:60px 24px}
+h1{font-weight:300;font-size:28px;letter-spacing:-.01em}
+p{color:#777;margin-top:8px;font-size:14px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px;max-width:1200px}
+.card{background:#fff;padding:26px;border:1px solid #e8e6e2;transition:.3s}
+.card:hover{transform:translateY(-4px);box-shadow:0 20px 40px -24px rgba(0,0,0,.25)}
+.card .sw{display:flex;gap:6px;margin-bottom:16px}
+.card .sw i{width:22px;height:22px;border-radius:50%;border:1px solid #ddd}
+.card b{font-size:18px;font-weight:500}
+.card span{display:block;margin-top:6px;font-size:13.5px;color:#777;line-height:1.6}
+.draftbar{display:none}
+@media (max-width:800px){.cards{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<h1>소로롱 벌룬 홈페이지 초안</h1>
+<p>세 가지 방향 중 마음에 드는 쪽을 골라주세요. 세부 수정은 선택 후 진행합니다.</p>
+<div class="cards">
+  <a class="card" href="a.html"><div class="sw"><i style="background:#fff"></i><i style="background:#fdf2f6"></i><i style="background:#161616"></i></div><b>A안 화이트 갤러리</b><span>흰 배경과 넓은 여백, 로고 문양을 첫 화면에 단독으로 크게. 사진 메이슨리 그리드가 주인공.</span></a>
+  <a class="card" href="b.html"><div class="sw"><i style="background:#fbf5f5"></i><i style="background:#e98cb5"></i><i style="background:#2b2224"></i></div><b>B안 소프트 블러시</b><span>로고의 핑크를 배경 톤으로 확장. 둥근 사진 카드와 세리프 제목으로 밝고 부드러운 고급스러움.</span></a>
+  <a class="card" href="c.html"><div class="sw"><i style="background:#fff"></i><i style="background:#13192b"></i><i style="background:#f6f3ef"></i></div><b>C안 에디토리얼</b><span>큰 세리프 헤드카피와 엇갈린 사진 배치. 네이비 띠에 실적과 고객사를 모아 기업 고객 신뢰감을 강조.</span></a>
+</div>
+</body>
+</html>
