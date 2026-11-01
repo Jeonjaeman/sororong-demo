@@ -33,7 +33,10 @@
   var btn = document.querySelector('[data-menu-btn]'), nav = document.querySelector('[data-nav]');
   if (btn && nav) btn.addEventListener('click', function () {
     var open = nav.classList.toggle('open'); btn.setAttribute('aria-expanded', open);
-    document.body.style.overflow = open ? 'hidden' : '';
+    document.body.style.overflow = open ? 'hidden' : ''; document.body.classList.toggle('menu-open', open);
+  });
+  if (btn && nav) nav.addEventListener('click', function (e) {
+    if (e.target.closest('a') && nav.classList.contains('open')) { nav.classList.remove('open'); btn.setAttribute('aria-expanded', false); document.body.style.overflow = ''; document.body.classList.remove('menu-open'); }
   });
 
   // 고객사 흐름 복제
