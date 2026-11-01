@@ -41,6 +41,7 @@
 
   // 초안 전환 바
   var here = location.pathname.split('/').pop();
+  if (/^f-/.test(here)) here = 'f.html';
   var bar = document.createElement('nav'); bar.className = 'draftbar'; bar.setAttribute('aria-label', '초안 전환');
   [['a.html', 'A안'], ['b.html', 'B안'], ['c.html', 'C안'], ['d.html', 'D안'], ['e.html', 'E안'], ['f.html', 'F안']].forEach(function (d) {
     var a = document.createElement('a'); a.href = d[0]; a.textContent = d[1]; if (here === d[0]) a.className = 'on'; bar.appendChild(a);

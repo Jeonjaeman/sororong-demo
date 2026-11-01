@@ -6,195 +6,7 @@
 <title>소로롱 벌룬 F안 포토 퍼스트</title>
 <meta name="description" content="기업·관공서·학교 행사부터 돌잔치까지. 소로롱 이벤트&벌룬의 현장 사진과 상담 안내.">
 <link rel="stylesheet" href="assets/common.css">
-<style>
-:root{--bg:#fff;--ink:#1a1a1a;--mute:#6f6f6f;--line:#ebe7e4;--pink:#fc7294;--pink2:#ffd4df;--pinkbg:#fff3f6;--navy:#1c2033}
-body{font-size:16px}
-/* 헤더 */
-.hdr{position:fixed;inset:0 0 auto;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);transition:box-shadow .4s}
-.hdr.scrolled{box-shadow:0 1px 0 var(--line)}
-.hdr .wrap{display:flex;align-items:center;justify-content:space-between;height:76px}
-.brand img{height:26px;width:auto}
-.nav ul{display:flex;gap:26px;font-size:14.5px;letter-spacing:-.01em;color:#2a2a2a;font-weight:500}
-.nav a{position:relative;padding:6px 0;white-space:nowrap}
-.nav a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:2px;background:var(--pink);transition:right .35s}
-.nav a:hover::after{right:0}
-.cta{font-size:13.5px;font-weight:600;background:var(--pink);color:#fff;padding:11px 22px;border-radius:999px;transition:.3s;white-space:nowrap}
-.cta:hover{background:#e95c80}
-.menu-btn{display:none;width:40px;height:40px;position:relative}
-.menu-btn span{position:absolute;left:9px;right:9px;height:1.5px;background:var(--ink);top:14px}
-.menu-btn span+span{top:20px}.menu-btn span+span+span{top:26px}
-@media (max-width:1180px){.nav ul{gap:18px;font-size:13.5px}}
-@media (max-width:1000px){
-  .nav{position:fixed;inset:0;background:#fff;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .35s}
-  .nav.open{opacity:1;pointer-events:auto}
-  .nav ul{flex-direction:column;gap:20px;text-align:center;font-size:22px;font-weight:400}
-  .menu-btn{display:block;position:relative;z-index:60}
-  .cta{display:none}
-  .hdr .wrap{height:64px}
-}
-/* 오른쪽 고정 버튼 */
-.quick{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:45;display:flex;flex-direction:column;background:#fff;border-radius:18px;box-shadow:0 10px 40px -10px rgba(0,0,0,.25);overflow:hidden;border:1px solid var(--line)}
-.quick a{display:flex;flex-direction:column;align-items:center;gap:6px;width:76px;padding:14px 0 12px;font-size:11.5px;font-weight:600;color:#333;border-bottom:1px solid var(--line);transition:background .25s}
-.quick a:last-child{border-bottom:0}
-.quick a:hover{background:var(--pinkbg)}
-.quick svg{width:22px;height:22px}
-.quick .ig svg{color:#e1306c}.quick .kk{background:#fee500}.quick .kk:hover{background:#ffd900}.quick .tel svg{color:var(--pink)}
-@media (max-width:1000px){
-  .quick{top:auto;bottom:0;left:0;right:0;transform:none;flex-direction:row;border-radius:0;border:0;border-top:1px solid var(--line);box-shadow:0 -6px 30px -10px rgba(0,0,0,.2)}
-  .quick a{flex:1;width:auto;border-bottom:0;border-right:1px solid var(--line);padding:10px 0 9px}
-  .quick a:last-child{border-right:0}
-  .draftbar{bottom:82px}
-}
-/* 히어로 슬라이드 */
-.hero{position:relative;height:100svh;min-height:600px;max-height:1000px;overflow:hidden;background:#111;color:#fff}
-.hero .slide{position:absolute;inset:0;opacity:0;transition:opacity 1.6s ease}
-.hero .slide img{width:100%;height:100%;object-fit:cover;transform:scale(1.08);transition:transform 7s linear}
-.hero .slide.on{opacity:1}
-.hero .slide.on img{transform:scale(1)}
-.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.18) 0%,rgba(0,0,0,0) 35%,rgba(0,0,0,.58) 100%)}
-.hero .txt{position:absolute;left:0;right:0;bottom:0;z-index:2;padding-bottom:clamp(60px,9vh,110px)}
-.hero .tag{display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.85)}
-.hero .tag img{height:34px;width:auto;filter:brightness(0) invert(1)}
-.hero h1{margin-top:22px;font-weight:600;font-size:clamp(32px,4.6vw,62px);line-height:1.25;letter-spacing:-.025em;text-shadow:0 2px 24px rgba(0,0,0,.25)}
-.hero h1 em{font-style:normal;color:var(--pink2)}
-.hero p{margin-top:18px;font-size:clamp(16px,1.4vw,19px);font-weight:400;color:rgba(255,255,255,.9);max-width:560px;line-height:1.7}
-.hero .ctrl{position:absolute;right:0;bottom:clamp(60px,9vh,110px);display:flex;gap:8px;z-index:2}
-.hero .ctrl button{width:34px;height:4px;border-radius:2px;background:rgba(255,255,255,.35);position:relative;overflow:hidden}
-.hero .ctrl button::after{content:"";position:absolute;inset:0;background:#fff;transform:scaleX(0);transform-origin:left}
-.hero .ctrl button.on::after{animation:bar 5s linear forwards}
-@keyframes bar{to{transform:scaleX(1)}}
-.hero .cap{position:absolute;left:0;bottom:24px;z-index:2;font-size:12px;letter-spacing:.08em;color:rgba(255,255,255,.7)}
-.hero .wrap{position:relative;height:100%}
-@media (max-width:720px){.hero{min-height:560px}.hero .ctrl{left:0;right:auto;bottom:30px}.hero .cap{display:none}.hero .txt{padding-bottom:70px}}
-/* 공통 */
-section{padding:110px 0}
-@media (max-width:720px){section{padding:72px 0}}
-.eyebrow{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--pink);font-weight:600}
-.h2{font-weight:600;font-size:clamp(28px,3.4vw,44px);line-height:1.3;margin-top:14px;letter-spacing:-.025em}
-.lead{font-size:17px;color:#444;line-height:1.85;margin-top:18px;font-weight:400}
-/* 경력 + 숫자 + 고객사 */
-.trust{background:var(--pinkbg);padding:90px 0 64px}
-.trust .grid{display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:center}
-.trust .pts{margin-top:28px;display:grid;gap:12px}
-.trust .pts li{display:flex;gap:12px;font-size:15.5px;color:#333}
-.trust .pts li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--pink);margin-top:10px;flex:none}
-.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px 20px}
-.stat{background:#fff;border-radius:18px;padding:30px 28px;box-shadow:0 14px 40px -24px rgba(252,114,148,.35)}
-.stat b{display:block;font-family:"Cormorant Garamond",serif;font-weight:400;font-size:clamp(46px,5vw,68px);line-height:1;letter-spacing:-.02em}
-.stat b small{font-size:.48em;vertical-align:baseline;color:var(--pink);margin-left:2px}
-.stat > span{display:block;margin-top:10px;font-size:14.5px;color:#555;font-weight:500}
-.clients{margin-top:70px;border-top:1px solid #f3dbe2;padding-top:40px}
-.clients .eyebrow{text-align:center;display:block}
-.marquee{margin-top:30px}
-.marquee__track span{display:inline-flex;align-items:center;height:64px;padding:0 40px;font-family:"Cormorant Garamond",serif;font-size:30px;letter-spacing:.06em;color:#8a7a80;text-transform:uppercase;white-space:nowrap}
-.marquee__track span.ko{font-family:inherit;font-size:19px;font-weight:500;letter-spacing:.1em}
-@media (max-width:900px){.trust .grid{grid-template-columns:1fr;gap:40px}.stat-grid{gap:14px}.stat{padding:22px 20px}}
-/* 서비스 7 */
-.svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:50px}
-.svc{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;border-radius:16px;background:#f1eeec;color:#fff}
-.svc img{width:100%;height:100%;object-fit:cover;transition:transform 1.3s cubic-bezier(.2,.7,.2,1)}
-.svc:hover img{transform:scale(1.06)}
-.svc::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(0,0,0,.62))}
-.svc .t{position:absolute;left:22px;right:22px;bottom:22px;z-index:1}
-.svc .no{font-size:12px;letter-spacing:.2em;opacity:.8}
-.svc h3{font-weight:600;font-size:clamp(17px,1.5vw,21px);line-height:1.35;margin-top:6px;letter-spacing:-.02em}
-.svc p{font-size:13.5px;opacity:.85;margin-top:6px;line-height:1.5}
-.svc.ask{background:var(--pink);display:flex;align-items:flex-end}
-.svc.ask::after{display:none}
-.svc.ask .t{position:static;padding:22px}
-.svc.ask .big{font-size:clamp(26px,2.4vw,34px);font-weight:700;line-height:1.2;letter-spacing:-.02em}
-.svc.ask .arrow{display:inline-flex;width:44px;height:44px;border-radius:50%;background:#fff;color:var(--pink);align-items:center;justify-content:center;margin-top:20px;font-size:20px}
-@media (max-width:1000px){.svc-grid{grid-template-columns:repeat(3,1fr);gap:12px}}
-@media (max-width:640px){.svc-grid{grid-template-columns:1fr 1fr;gap:10px}.svc .t{left:14px;right:14px;bottom:14px}.svc p{display:none}.svc.ask .t{padding:14px}}
-/* 시공 사례 */
-.works{background:#fafaf9;border-top:1px solid var(--line)}
-.works .head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap}
-.tabs{display:flex;gap:8px;flex-wrap:wrap}
-.tabs button{padding:9px 16px;border-radius:999px;border:1px solid #ddd;font-size:14px;font-weight:500;background:#fff;color:#444;transition:.25s}
-.tabs button.on,.tabs button:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
-.masonry{columns:3;column-gap:18px;margin-top:44px}
-.work{display:block;break-inside:avoid;margin-bottom:18px;background:#fff;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
-.work.hide{display:none}
-.work .ph{overflow:hidden;background:#eee}
-.work img{width:100%;transition:transform 1.4s cubic-bezier(.2,.7,.2,1)}
-.work:hover img{transform:scale(1.04)}
-.work .cap{padding:16px 18px 18px}
-.work .cap .k{font-size:11.5px;letter-spacing:.14em;color:var(--pink);font-weight:600;text-transform:uppercase}
-.work .cap h3{font-weight:600;font-size:16.5px;margin-top:4px;letter-spacing:-.01em}
-.work .cap p{font-size:14px;color:var(--mute);margin-top:4px;line-height:1.55}
-.works .more{display:flex;justify-content:center;margin-top:24px}
-.works .more a{font-size:14px;font-weight:600;padding:14px 28px;border-radius:999px;border:1px solid var(--ink);transition:.3s}
-.works .more a:hover{background:var(--ink);color:#fff}
-@media (max-width:900px){.masonry{columns:2;column-gap:12px}.work{margin-bottom:12px}.work .cap{padding:12px 14px 14px}.work .cap h3{font-size:15px}.work .cap p{font-size:13px}}
-/* 사진 흐름 */
-.strip{padding:0 0 20px;overflow:hidden}
-.strip .row{display:flex;gap:12px;width:max-content;animation:marquee 60s linear infinite;margin-bottom:12px}
-.strip .row.rev{animation-direction:reverse;animation-duration:72s}
-.strip img{height:clamp(160px,22vw,300px);width:auto;border-radius:10px}
-.strip:hover .row{animation-play-state:paused}
-/* FAQ + 문의 */
-.faq .list{margin-top:40px;border-top:1px solid var(--line)}
-.faq details{border-bottom:1px solid var(--line)}
-.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px 4px;font-size:17px;font-weight:600;letter-spacing:-.01em}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"+";font-size:26px;font-weight:300;color:var(--pink);transition:transform .3s;flex:none}
-.faq details[open] summary::after{transform:rotate(45deg)}
-.faq .a{padding:0 4px 26px;color:#444;font-size:15.5px;line-height:1.85;max-width:760px}
-.contact{background:var(--navy);color:#fff}
-.contact .grid{display:grid;grid-template-columns:1fr 1.15fr;gap:70px;align-items:start}
-.contact .eyebrow{color:var(--pink2)}
-.contact .lead{color:#c9cbd6}
-.contact .ways{margin-top:34px;display:grid;gap:10px}
-.contact .ways a{display:flex;align-items:center;gap:14px;padding:16px 18px;border:1px solid rgba(255,255,255,.14);border-radius:14px;font-size:15px;font-weight:500;transition:.3s}
-.contact .ways a:hover{background:rgba(255,255,255,.08)}
-.contact .ways svg{width:20px;height:20px}
-.contact .ways .kk{background:#fee500;color:#191919;border-color:#fee500}.contact .ways .kk:hover{background:#ffd900}
-.form{background:#fff;color:var(--ink);border-radius:22px;padding:34px;box-shadow:0 30px 80px -30px rgba(0,0,0,.5)}
-.form h3{font-size:22px;font-weight:700;letter-spacing:-.02em}
-.form .sub{font-size:14px;color:var(--mute);margin-top:6px}
-.form .row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
-.form .row.one{grid-template-columns:1fr}
-.form label{display:block;font-size:13px;font-weight:600;color:#444;margin-bottom:7px}
-.form input,.form select,.form textarea{width:100%;font:inherit;font-size:15px;padding:13px 14px;border:1px solid #ddd;border-radius:10px;background:#fff;color:var(--ink);transition:border .25s}
-.form input:focus,.form select:focus,.form textarea:focus{outline:none;border-color:var(--pink);box-shadow:0 0 0 3px rgba(252,114,148,.15)}
-.form textarea{min-height:120px;resize:vertical}
-.form .agree{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:#555;margin-top:16px}
-.form .agree input{width:16px;height:16px;margin-top:2px}
-.form button{width:100%;margin-top:18px;background:var(--pink);color:#fff;font-weight:700;font-size:16px;padding:16px;border-radius:12px;transition:.3s}
-.form button:hover{background:#e95c80}
-.form .done{display:none;margin-top:16px;padding:14px 16px;border-radius:10px;background:var(--pinkbg);color:#b53a5c;font-size:14px;line-height:1.6}
-.form.sent .done{display:block}
-@media (max-width:900px){.contact .grid{grid-template-columns:1fr;gap:40px}.form{padding:24px 20px}.form .row{grid-template-columns:1fr}}
-/* 전체 갤러리 */
-.gallery{border-top:1px solid var(--line)}
-.gtabs{margin-top:34px}
-.gtabs i{font-style:normal;font-size:12px;opacity:.6;margin-left:2px}
-.ggrid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:28px}
-.ggrid a{display:block;aspect-ratio:1;overflow:hidden;border-radius:8px;background:#f1eeec}
-.ggrid img{width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
-.ggrid a:hover img{transform:scale(1.06)}
-.gmore{display:flex;justify-content:center;margin-top:30px}
-.gmore button{font-size:14px;font-weight:600;padding:14px 28px;border-radius:999px;border:1px solid var(--ink);transition:.3s}
-.gmore button:hover{background:var(--ink);color:#fff}
-.gmore button span{opacity:.6;font-weight:500;margin-left:4px}
-@media (max-width:1000px){.ggrid{grid-template-columns:repeat(4,1fr)}}
-@media (max-width:640px){.ggrid{grid-template-columns:repeat(3,1fr);gap:4px}.ggrid a{border-radius:4px}}
-.lb{position:fixed;inset:0;z-index:10000;background:rgba(12,12,16,.94);display:flex;align-items:center;justify-content:center}
-.lb[hidden]{display:none}
-.lb img{max-width:min(92vw,1400px);max-height:86vh;border-radius:6px;object-fit:contain}
-.lb button{position:absolute;color:#fff;font-size:40px;line-height:1;width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.08)}
-.lb button:hover{background:rgba(255,255,255,.18)}
-.lb .x{top:18px;right:18px;font-size:34px}
-.lb .pv{left:18px;top:50%;transform:translateY(-50%)}
-.lb .nx{right:18px;top:50%;transform:translateY(-50%)}
-.lb .ct{position:absolute;bottom:20px;left:0;right:0;text-align:center;color:rgba(255,255,255,.7);font-size:13px;letter-spacing:.08em}
-@media (max-width:640px){.lb .pv,.lb .nx{top:auto;bottom:12px;transform:none}.lb .ct{bottom:30px}}
-/* 푸터 */
-footer{padding:44px 0 120px;font-size:13.5px;color:var(--mute)}
-footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;align-items:center}
-footer img{height:22px;width:auto;opacity:.9}
-@media (min-width:1001px){footer{padding-bottom:60px}}
-</style>
+<link rel="stylesheet" href="assets/f.css">
 </head>
 <body>
 <header class="hdr" data-header>
@@ -202,13 +14,13 @@ footer img{height:22px;width:auto;opacity:.9}
     <a class="brand" href="#"><img src="assets/logo/logo-pink.png" alt="sororong EVENT & BALLOON"></a>
     <nav class="nav" data-nav aria-label="주 메뉴">
       <ul>
-        <li><a href="#svc">기업 · 관공서 · 학교행사</a></li>
-        <li><a href="#svc">돌잔치 · 개인행사</a></li>
-        <li><a href="#svc">헬륨 · 인쇄 · 레터링풍선</a></li>
-        <li><a href="#svc">자이언트플라워 · 꽃풍선 · 벌룬화환</a></li>
-        <li><a href="#svc">폼보드 · 포맥스 · 실사물</a></li>
-        <li><a href="#svc">행사장비 렌탈</a></li>
-        <li><a href="#contact">상담문의</a></li>
+        <li><a href="f-biz.html">기업 · 관공서 · 학교행사</a></li>
+        <li><a href="f-family.html">돌잔치 · 개인행사</a></li>
+        <li><a href="f-helium.html">헬륨 · 인쇄 · 레터링풍선</a></li>
+        <li><a href="f-flower.html">자이언트플라워 · 꽃풍선 · 벌룬화환</a></li>
+        <li><a href="f-print.html">폼보드 · 포맥스 · 실사물</a></li>
+        <li><a href="f-rental.html">행사장비 렌탈</a></li>
+        <li><a href="f-contact.html">상담문의</a></li>
       </ul>
     </nav>
     <a class="cta" href="#contact">상담문의</a>
@@ -279,13 +91,13 @@ footer img{height:22px;width:auto;opacity:.9}
     <div class="eyebrow reveal">Services</div>
     <h2 class="h2 reveal" data-delay="1">행사에 맞는 연출을 고르세요</h2>
     <div class="svc-grid">
-      <a class="svc reveal" href="#gallery"><img src="assets/real/biz/087.jpg" alt="" loading="lazy"><div class="t"><div class="no">01</div><h3>기업 · 관공서 · 학교행사</h3><p>시상식, 기념식, 팝업, 입학·졸업식 포토존</p></div></a>
-      <a class="svc reveal" data-delay="1" href="#gallery"><img src="assets/real/fam/017.jpg" alt="" loading="lazy"><div class="t"><div class="no">02</div><h3>돌잔치 · 개인행사</h3><p>돌상, 생일, 브라이덜샤워, 홈파티 연출</p></div></a>
-      <a class="svc reveal" data-delay="2" href="#gallery"><img src="assets/real/hel/007.jpg" alt="" loading="lazy"><div class="t"><div class="no">03</div><h3>헬륨 · 인쇄 · 레터링풍선</h3><p>로고 인쇄 풍선, 문구 레터링, 헬륨 번들</p></div></a>
-      <a class="svc reveal" data-delay="3" href="#gallery"><img src="assets/real/wrt/006.jpg" alt="" loading="lazy"><div class="t"><div class="no">04</div><h3>자이언트플라워 · 꽃풍선 · 벌룬화환</h3><p>개업, 축하, 공간의 포인트가 되는 대형 오브제</p></div></a>
-      <a class="svc reveal" href="#gallery"><img src="assets/real/sch/025.jpg" alt="" loading="lazy"><div class="t"><div class="no">05</div><h3>폼보드 · 포맥스 · 실사물 제작</h3><p>백월, 입간판, 현수막, 등신대 일괄 제작</p></div></a>
-      <a class="svc reveal" data-delay="1" href="#gallery"><img src="assets/real/biz/062.jpg" alt="" loading="lazy"><div class="t"><div class="no">06</div><h3>행사장비 렌탈</h3><p>레드카펫, 천막, 테이블, 단상, 조명</p></div></a>
-      <a class="svc ask reveal" data-delay="2" href="#contact"><div class="t"><div class="no">07</div><div class="big">행사 날짜와 장소만<br>알려주세요</div><p style="opacity:.95;display:block">어울리는 연출과 견적을 제안드립니다</p><span class="arrow">→</span></div></a>
+      <a class="svc reveal" href="f-biz.html"><img src="assets/real/biz/087.jpg" alt="" loading="lazy"><div class="t"><div class="no">01</div><h3>기업 · 관공서 · 학교행사</h3><p>시상식, 기념식, 팝업, 입학·졸업식 포토존</p></div></a>
+      <a class="svc reveal" data-delay="1" href="f-family.html"><img src="assets/real/fam/017.jpg" alt="" loading="lazy"><div class="t"><div class="no">02</div><h3>돌잔치 · 개인행사</h3><p>돌상, 생일, 브라이덜샤워, 홈파티 연출</p></div></a>
+      <a class="svc reveal" data-delay="2" href="f-helium.html"><img src="assets/real/hel/007.jpg" alt="" loading="lazy"><div class="t"><div class="no">03</div><h3>헬륨 · 인쇄 · 레터링풍선</h3><p>로고 인쇄 풍선, 문구 레터링, 헬륨 번들</p></div></a>
+      <a class="svc reveal" data-delay="3" href="f-flower.html"><img src="assets/real/wrt/006.jpg" alt="" loading="lazy"><div class="t"><div class="no">04</div><h3>자이언트플라워 · 꽃풍선 · 벌룬화환</h3><p>개업, 축하, 공간의 포인트가 되는 대형 오브제</p></div></a>
+      <a class="svc reveal" href="f-print.html"><img src="assets/real/sch/025.jpg" alt="" loading="lazy"><div class="t"><div class="no">05</div><h3>폼보드 · 포맥스 · 실사물 제작</h3><p>백월, 입간판, 현수막, 등신대 일괄 제작</p></div></a>
+      <a class="svc reveal" data-delay="1" href="f-rental.html"><img src="assets/real/biz/062.jpg" alt="" loading="lazy"><div class="t"><div class="no">06</div><h3>행사장비 렌탈</h3><p>레드카펫, 천막, 테이블, 단상, 조명</p></div></a>
+      <a class="svc ask reveal" data-delay="2" href="f-contact.html#form"><div class="t"><div class="no">07</div><div class="big">행사 날짜와 장소만<br>알려주세요</div><p style="opacity:.95;display:block">어울리는 연출과 견적을 제안드립니다</p><span class="arrow">→</span></div></a>
     </div>
   </div>
 </section>
@@ -446,9 +258,6 @@ footer img{height:22px;width:auto;opacity:.9}
   lb.querySelector('.x').onclick=close; lb.querySelector('.pv').onclick=function(){show(li-1)}; lb.querySelector('.nx').onclick=function(){show(li+1)};
   lb.addEventListener('click',function(e){ if(e.target===lb) close(); });
   document.addEventListener('keydown',function(e){ if(lb.hidden) return; if(e.key==='Escape') close(); if(e.key==='ArrowLeft') show(li-1); if(e.key==='ArrowRight') show(li+1); });
-  // 서비스 카드를 누르면 갤러리 분류로 이동
-  var svcMap=['biz','fam','hel','wrt','sch','biz'];
-  document.querySelectorAll('.svc-grid .svc:not(.ask)').forEach(function(c,n){ c.addEventListener('click',function(){ var b=document.querySelector('[data-gtabs] button[data-g="'+svcMap[n]+'"]'); if(b) b.click(); }); });
   // 상담 접수 (초안: 전송 없음)
   var form=document.querySelector('[data-form]');
   form.addEventListener('submit',function(e){ e.preventDefault(); if(!form.checkValidity()){ form.reportValidity(); return; } form.classList.add('sent'); });
