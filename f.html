@@ -165,6 +165,30 @@ section{padding:110px 0}
 .form .done{display:none;margin-top:16px;padding:14px 16px;border-radius:10px;background:var(--pinkbg);color:#b53a5c;font-size:14px;line-height:1.6}
 .form.sent .done{display:block}
 @media (max-width:900px){.contact .grid{grid-template-columns:1fr;gap:40px}.form{padding:24px 20px}.form .row{grid-template-columns:1fr}}
+/* 전체 갤러리 */
+.gallery{border-top:1px solid var(--line)}
+.gtabs{margin-top:34px}
+.gtabs i{font-style:normal;font-size:12px;opacity:.6;margin-left:2px}
+.ggrid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:28px}
+.ggrid a{display:block;aspect-ratio:1;overflow:hidden;border-radius:8px;background:#f1eeec}
+.ggrid img{width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.ggrid a:hover img{transform:scale(1.06)}
+.gmore{display:flex;justify-content:center;margin-top:30px}
+.gmore button{font-size:14px;font-weight:600;padding:14px 28px;border-radius:999px;border:1px solid var(--ink);transition:.3s}
+.gmore button:hover{background:var(--ink);color:#fff}
+.gmore button span{opacity:.6;font-weight:500;margin-left:4px}
+@media (max-width:1000px){.ggrid{grid-template-columns:repeat(4,1fr)}}
+@media (max-width:640px){.ggrid{grid-template-columns:repeat(3,1fr);gap:4px}.ggrid a{border-radius:4px}}
+.lb{position:fixed;inset:0;z-index:10000;background:rgba(12,12,16,.94);display:flex;align-items:center;justify-content:center}
+.lb[hidden]{display:none}
+.lb img{max-width:min(92vw,1400px);max-height:86vh;border-radius:6px;object-fit:contain}
+.lb button{position:absolute;color:#fff;font-size:40px;line-height:1;width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.08)}
+.lb button:hover{background:rgba(255,255,255,.18)}
+.lb .x{top:18px;right:18px;font-size:34px}
+.lb .pv{left:18px;top:50%;transform:translateY(-50%)}
+.lb .nx{right:18px;top:50%;transform:translateY(-50%)}
+.lb .ct{position:absolute;bottom:20px;left:0;right:0;text-align:center;color:rgba(255,255,255,.7);font-size:13px;letter-spacing:.08em}
+@media (max-width:640px){.lb .pv,.lb .nx{top:auto;bottom:12px;transform:none}.lb .ct{bottom:30px}}
 /* 푸터 */
 footer{padding:44px 0 120px;font-size:13.5px;color:var(--mute)}
 footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;align-items:center}
@@ -200,11 +224,11 @@ footer img{height:22px;width:auto;opacity:.9}
 </nav>
 
 <section class="hero" id="top">
-  <div class="slide on"><img src="assets/photos/p23.jpg" alt="실버 시퀸 포토월 현장"></div>
-  <div class="slide"><img src="assets/photos/p28.jpg" alt="골드 시퀸 포토월과 화이트 패널"></div>
-  <div class="slide"><img src="assets/photos/p20.jpg" alt="수상식 네이비 포토월과 레드카펫"></div>
-  <div class="slide"><img src="assets/photos/p36.jpg" alt="파스텔 풍선 포토월"></div>
-  <div class="slide"><img src="assets/photos/p27.jpg" alt="연말 파티 실버 포토월"></div>
+  <div class="slide on"><img src="assets/real/biz/040.jpg" alt="풍선으로 만든 소파와 테이블 포토존"></div>
+  <div class="slide"><img src="assets/real/biz/064.jpg" alt="크리스마스 마을 풍선 포토존"></div>
+  <div class="slide"><img src="assets/real/sch/008.jpg" alt="학교 축제 무대 풍선 장식"></div>
+  <div class="slide"><img src="assets/real/biz/123.jpg" alt="창립 20주년 기념 포토월"></div>
+  <div class="slide"><img src="assets/real/biz/130.jpg" alt="연말 송년회 레드 골드 포토월"></div>
   <div class="wrap">
     <div class="txt">
       <div class="tag"><img src="assets/logo/mark-white.svg" alt="">sororong · event & balloon</div>
@@ -226,8 +250,9 @@ footer img{height:22px;width:auto;opacity:.9}
         <h2 class="h2 reveal" data-delay="1">기업 행사부터 가족 행사까지<br>현장에서 쌓은 경험</h2>
         <p class="lead reveal" data-delay="2">소로롱은 경기 광주를 기반으로 브랜드 팝업, 기업 시상식과 기념식, 관공서와 학교 행사, 돌잔치의 공간을 풍선으로 스타일링합니다. 행사 목적과 브랜드 컬러에 맞춰 디자인하고, 제작부터 설치·철거까지 직접 진행합니다.</p>
         <ul class="pts reveal" data-delay="3">
-          <li>스타벅스, 나이키, 라코스테, 코웨이 등 브랜드 현장 경험</li>
-          <li>포토월 · 입구 아치 · 테이블 오브제 · 실사물까지 일괄 연출</li>
+          <li>스타벅스, 라코스테, 아디다스, 버거킹, 올리브영, 야놀자 등 브랜드 현장 경험</li>
+          <li>포토월 · 입구 아치 · 대형 조형 풍선 · 실사물까지 일괄 연출</li>
+          <li>유치원 · 초중고 입학식, 졸업식, 학교 축제 무대 장식</li>
           <li>서울 · 경기 중심, 전국 출장 설치 가능</li>
         </ul>
       </div>
@@ -242,7 +267,7 @@ footer img{height:22px;width:auto;opacity:.9}
       <span class="eyebrow">함께한 고객사</span>
       <div class="marquee" aria-label="고객사 목록">
         <div class="marquee__track">
-          <span>Starbucks</span><span>Nike</span><span>Lacoste</span><span>Levi's</span><span>Coway</span><span>Fila</span><span>Mokkozi</span><span>Kalisan</span><span>CCP</span><span class="ko">아산병원</span><span class="ko">인천광역시</span><span class="ko">대구 · 경북</span>
+          <span>Starbucks</span><span>Lacoste</span><span>adidas</span><span>Nike</span><span>Burger King</span><span>Olive Young</span><span>Megabox</span><span>Yanolja</span><span>Fila</span><span>Coway</span><span>Levi&#39;s</span><span>Shake Shack</span><span>Starfield</span><span>Mokkoji</span><span>CCP</span><span class="ko">인천광역시</span><span class="ko">아산병원</span>
         </div>
       </div>
     </div>
@@ -254,12 +279,12 @@ footer img{height:22px;width:auto;opacity:.9}
     <div class="eyebrow reveal">Services</div>
     <h2 class="h2 reveal" data-delay="1">행사에 맞는 연출을 고르세요</h2>
     <div class="svc-grid">
-      <a class="svc reveal" href="#works"><img src="assets/photos/p20.jpg" alt=""><div class="t"><div class="no">01</div><h3>기업 · 관공서 · 학교행사</h3><p>시상식, 기념식, 팝업, 입학·졸업식 포토존</p></div></a>
-      <a class="svc reveal" data-delay="1" href="#works"><img src="assets/photos/p31.jpg" alt=""><div class="t"><div class="no">02</div><h3>돌잔치 · 개인행사</h3><p>돌상, 생일, 브라이덜샤워, 홈파티 연출</p></div></a>
-      <a class="svc reveal" data-delay="2" href="#works"><img src="assets/photos/p35.jpg" alt=""><div class="t"><div class="no">03</div><h3>헬륨 · 인쇄 · 레터링풍선</h3><p>로고 인쇄 풍선, 문구 레터링, 헬륨 번들</p></div></a>
-      <a class="svc reveal" data-delay="3" href="#works"><img src="assets/photos/p24.jpg" alt=""><div class="t"><div class="no">04</div><h3>자이언트플라워 · 꽃풍선 · 벌룬화환</h3><p>개업, 축하, 공간의 포인트가 되는 대형 오브제</p></div></a>
-      <a class="svc reveal" href="#works"><img src="assets/photos/p02.jpg" alt=""><div class="t"><div class="no">05</div><h3>폼보드 · 포맥스 · 실사물 제작</h3><p>백월, 입간판, 현수막, 등신대 일괄 제작</p></div></a>
-      <a class="svc reveal" data-delay="1" href="#works"><img src="assets/photos/p38.jpg" alt=""><div class="t"><div class="no">06</div><h3>행사장비 렌탈</h3><p>레드카펫, 천막, 테이블, 단상, 조명</p></div></a>
+      <a class="svc reveal" href="#gallery"><img src="assets/real/biz/087.jpg" alt="" loading="lazy"><div class="t"><div class="no">01</div><h3>기업 · 관공서 · 학교행사</h3><p>시상식, 기념식, 팝업, 입학·졸업식 포토존</p></div></a>
+      <a class="svc reveal" data-delay="1" href="#gallery"><img src="assets/real/fam/017.jpg" alt="" loading="lazy"><div class="t"><div class="no">02</div><h3>돌잔치 · 개인행사</h3><p>돌상, 생일, 브라이덜샤워, 홈파티 연출</p></div></a>
+      <a class="svc reveal" data-delay="2" href="#gallery"><img src="assets/real/hel/007.jpg" alt="" loading="lazy"><div class="t"><div class="no">03</div><h3>헬륨 · 인쇄 · 레터링풍선</h3><p>로고 인쇄 풍선, 문구 레터링, 헬륨 번들</p></div></a>
+      <a class="svc reveal" data-delay="3" href="#gallery"><img src="assets/real/wrt/006.jpg" alt="" loading="lazy"><div class="t"><div class="no">04</div><h3>자이언트플라워 · 꽃풍선 · 벌룬화환</h3><p>개업, 축하, 공간의 포인트가 되는 대형 오브제</p></div></a>
+      <a class="svc reveal" href="#gallery"><img src="assets/real/sch/025.jpg" alt="" loading="lazy"><div class="t"><div class="no">05</div><h3>폼보드 · 포맥스 · 실사물 제작</h3><p>백월, 입간판, 현수막, 등신대 일괄 제작</p></div></a>
+      <a class="svc reveal" data-delay="1" href="#gallery"><img src="assets/real/biz/062.jpg" alt="" loading="lazy"><div class="t"><div class="no">06</div><h3>행사장비 렌탈</h3><p>레드카펫, 천막, 테이블, 단상, 조명</p></div></a>
       <a class="svc ask reveal" data-delay="2" href="#contact"><div class="t"><div class="no">07</div><div class="big">행사 날짜와 장소만<br>알려주세요</div><p style="opacity:.95;display:block">어울리는 연출과 견적을 제안드립니다</p><span class="arrow">→</span></div></a>
     </div>
   </div>
@@ -273,43 +298,56 @@ footer img{height:22px;width:auto;opacity:.9}
         <h2 class="h2 reveal" data-delay="1">시공 사례</h2>
       </div>
       <div class="tabs" data-tabs>
-        <button class="on" data-f="all">전체</button><button data-f="biz">기업 · 관공서 · 학교</button><button data-f="fam">돌잔치 · 개인</button><button data-f="flw">꽃풍선 · 자이언트플라워</button><button data-f="prt">실사물</button><button data-f="rnt">장비 렌탈</button>
+        <button class="on" data-f="all">전체</button><button data-f="biz">기업 · 관공서</button><button data-f="sch">학교 · 유치원</button><button data-f="fam">돌잔치 · 개인</button><button data-f="wrt">벌룬화환</button><button data-f="flw">자이언트플라워</button><button data-f="hel">헬륨 · 레터링</button>
       </div>
     </div>
     <div class="masonry" data-works>
-      <a class="work reveal" data-c="biz" href="#"><div class="ph"><img src="assets/photos/p23.jpg" alt=""></div><div class="cap"><div class="k">Corporate</div><h3>모꼬지 2주년 기념 포토월</h3><p>실버 시퀸 월과 화이트 풍선, 브랜드 로고 패널</p></div></a>
-      <a class="work reveal" data-c="biz" data-delay="1" href="#"><div class="ph"><img src="assets/photos/p04.jpg" alt=""></div><div class="cap"><div class="k">Brand pop-up</div><h3>스타벅스 팝업 풍선 장식</h3><p>브랜드 컬러에 맞춘 그린 톤 풍선 기둥</p></div></a>
-      <a class="work reveal" data-c="fam" data-delay="2" href="#"><div class="ph"><img src="assets/photos/p31.jpg" alt=""></div><div class="cap"><div class="k">Private</div><h3>풀빌라 생일 파티</h3><p>헬륨 풍선과 가랜드로 꾸민 실내 연출</p></div></a>
-      <a class="work reveal" data-c="biz" href="#"><div class="ph"><img src="assets/photos/p28.jpg" alt=""></div><div class="cap"><div class="k">Year end</div><h3>연말 시상식 골드 포토월</h3><p>골드 시퀸 월과 화이트 패널, 크롬 풍선</p></div></a>
-      <a class="work reveal" data-c="flw" data-delay="1" href="#"><div class="ph"><img src="assets/photos/p24.jpg" alt=""></div><div class="cap"><div class="k">Giant flower</div><h3>자이언트 플라워 포토존</h3><p>대형 종이꽃과 파스텔 풍선 조합</p></div></a>
-      <a class="work reveal" data-c="biz" data-delay="2" href="#"><div class="ph"><img src="assets/photos/p36.jpg" alt=""></div><div class="cap"><div class="k">Brand</div><h3>칼리산 쇼룸 파스텔 포토월</h3><p>라벤더 · 민트 톤 오가닉 가랜드</p></div></a>
-      <a class="work reveal" data-c="biz" href="#"><div class="ph"><img src="assets/photos/p06.jpg" alt=""></div><div class="cap"><div class="k">Retail</div><h3>라코스테 매장 오픈 장식</h3><p>그린 · 화이트 풍선 기둥과 입구 포인트</p></div></a>
-      <a class="work reveal" data-c="prt" data-delay="1" href="#"><div class="ph"><img src="assets/photos/p02.jpg" alt=""></div><div class="cap"><div class="k">Print</div><h3>마라톤 행사 백월 · 실사물</h3><p>포맥스 입간판과 현수막, 풍선 아치 일괄 제작</p></div></a>
-      <a class="work reveal" data-c="biz" data-delay="2" href="#"><div class="ph"><img src="assets/photos/p21.jpg" alt=""></div><div class="cap"><div class="k">Anniversary</div><h3>창립 20주년 기념식</h3><p>네이비 · 골드 무대 장식과 로고 월</p></div></a>
-      <a class="work reveal" data-c="rnt" href="#"><div class="ph"><img src="assets/photos/p38.jpg" alt=""></div><div class="cap"><div class="k">Rental</div><h3>기념식 레드카펫 · 객석 세팅</h3><p>레드카펫, 의자, 단상 렌탈과 설치</p></div></a>
-      <a class="work reveal" data-c="fam" data-delay="1" href="#"><div class="ph"><img src="assets/photos/p17.jpg" alt=""></div><div class="cap"><div class="k">Graduation</div><h3>졸업 축하 포토존</h3><p>헬륨 풍선 번들과 레터링 풍선</p></div></a>
-      <a class="work reveal" data-c="biz" data-delay="2" href="#"><div class="ph"><img src="assets/photos/p30.jpg" alt=""></div><div class="cap"><div class="k">Brand</div><h3>휠라 행사 풍선 연출</h3><p>브랜드 컬러 레드 · 네이비 포인트</p></div></a>
-      <a class="work reveal" data-c="flw" href="#"><div class="ph"><img src="assets/photos/p08.jpg" alt=""></div><div class="cap"><div class="k">Garden</div><h3>가든 파티 벌룬 스탠드</h3><p>야외 공간에 맞춘 그린 톤 스탠드</p></div></a>
-      <a class="work reveal" data-c="biz" data-delay="1" href="#"><div class="ph"><img src="assets/photos/p14.jpg" alt=""></div><div class="cap"><div class="k">Corporate</div><h3>코웨이 사내 행사</h3><p>블루 톤 풍선 아치와 포토월</p></div></a>
-      <a class="work reveal" data-c="rnt" data-delay="2" href="#"><div class="ph"><img src="assets/photos/p12.jpg" alt=""></div><div class="cap"><div class="k">School</div><h3>운동장 입구 풍선 아치</h3><p>학교 체육대회 입장 아치와 장비 렌탈</p></div></a>
-      <a class="work reveal" data-c="biz" href="#"><div class="ph"><img src="assets/photos/p18.jpg" alt=""></div><div class="cap"><div class="k">Anniversary</div><h3>CCP 10주년 기념 장식</h3><p>로고 컬러에 맞춘 포토월과 테이블 오브제</p></div></a>
-      <a class="work reveal" data-c="prt" data-delay="1" href="#"><div class="ph"><img src="assets/photos/p26.jpg" alt=""></div><div class="cap"><div class="k">Public</div><h3>인천광역시 기념식</h3><p>무대 백월 실사 출력과 풍선 장식</p></div></a>
-      <a class="work reveal" data-c="fam" data-delay="2" href="#"><div class="ph"><img src="assets/photos/p34.jpg" alt=""></div><div class="cap"><div class="k">Outdoor</div><h3>야외 파티 미러볼 오브제</h3><p>미러볼 3종과 풍선 포인트</p></div></a>
+      <a class="work reveal" data-c="biz" href="assets/real/biz/045.jpg" data-lb><div class="ph"><img src="assets/real/biz/045.jpg" alt="스타벅스 매장 풍선 연출" loading="lazy"></div><div class="cap"><div class="k">Brand pop-up</div><h3>스타벅스 매장 풍선 연출</h3><p>그린 · 화이트 오가닉 가랜드와 로고 아치</p></div></a>
+      <a class="work reveal" data-c="sch" data-delay="1" href="assets/real/sch/003.jpg" data-lb><div class="ph"><img src="assets/real/sch/003.jpg" alt="모꼬지 페스티벌 무대" loading="lazy"></div><div class="cap"><div class="k">School festival</div><h3>모꼬지 페스티벌 무대</h3><p>퍼플 카펫과 무대 전면 풍선 장식</p></div></a>
+      <a class="work reveal" data-c="biz" data-delay="2" href="assets/real/biz/040.jpg" data-lb><div class="ph"><img src="assets/real/biz/040.jpg" alt="벌룬 소파 포토존" loading="lazy"></div><div class="cap"><div class="k">Installation</div><h3>벌룬 소파 포토존</h3><p>풍선으로 만든 소파 · 테이블 거실 세트</p></div></a>
+      <a class="work reveal" data-c="fam" href="assets/real/fam/017.jpg" data-lb><div class="ph"><img src="assets/real/fam/017.jpg" alt="핑크 캐슬 돌상" loading="lazy"></div><div class="cap"><div class="k">First birthday</div><h3>핑크 캐슬 돌상</h3><p>토끼 인형과 성 오브제, 라이트 숫자</p></div></a>
+      <a class="work reveal" data-c="biz" data-delay="1" href="assets/real/biz/046.jpg" data-lb><div class="ph"><img src="assets/real/biz/046.jpg" alt="라코스테 매장 입구 장식" loading="lazy"></div><div class="cap"><div class="k">Retail</div><h3>라코스테 매장 입구 장식</h3><p>그린 풍선 기둥과 화이트 로고 벌룬</p></div></a>
+      <a class="work reveal" data-c="biz" data-delay="2" href="assets/real/biz/087.jpg" data-lb><div class="ph"><img src="assets/real/biz/087.jpg" alt="CCP 10주년 기념 포토월" loading="lazy"></div><div class="cap"><div class="k">Anniversary</div><h3>CCP 10주년 기념 포토월</h3><p>네이비 · 실버 풍선과 시퀸 월, 라이트 숫자</p></div></a>
+      <a class="work reveal" data-c="sch" href="assets/real/sch/073.jpg" data-lb><div class="ph"><img src="assets/real/sch/073.jpg" alt="꿀벌 테마 입학식 아치" loading="lazy"></div><div class="cap"><div class="k">Entrance</div><h3>꿀벌 테마 입학식 아치</h3><p>그린 · 화이트 풍선과 꿀벌 오브제</p></div></a>
+      <a class="work reveal" data-c="wrt" data-delay="1" href="assets/real/wrt/006.jpg" data-lb><div class="ph"><img src="assets/real/wrt/006.jpg" alt="응원 벌룬 화환" loading="lazy"></div><div class="cap"><div class="k">Balloon wreath</div><h3>응원 벌룬 화환</h3><p>블루 톤 풍선과 리본 문구</p></div></a>
+      <a class="work reveal" data-c="biz" data-delay="2" href="assets/real/biz/051.jpg" data-lb><div class="ph"><img src="assets/real/biz/051.jpg" alt="버거킹 매장 오픈 장식" loading="lazy"></div><div class="cap"><div class="k">Brand</div><h3>버거킹 매장 오픈 장식</h3><p>버거와 감자튀김 모양 조형 풍선</p></div></a>
+      <a class="work reveal" data-c="biz" href="assets/real/biz/064.jpg" data-lb><div class="ph"><img src="assets/real/biz/064.jpg" alt="크리스마스 마을 포토존" loading="lazy"></div><div class="cap"><div class="k">Christmas</div><h3>크리스마스 마을 포토존</h3><p>트리와 진저브레드 하우스를 풍선으로</p></div></a>
+      <a class="work reveal" data-c="flw" data-delay="1" href="assets/real/flw/003.jpg" data-lb><div class="ph"><img src="assets/real/flw/003.jpg" alt="자이언트 플라워 전시 부스" loading="lazy"></div><div class="cap"><div class="k">Giant flower</div><h3>자이언트 플라워 전시 부스</h3><p>대형 종이꽃과 레드카펫 연출</p></div></a>
+      <a class="work reveal" data-c="biz" data-delay="2" href="assets/real/biz/115.jpg" data-lb><div class="ph"><img src="assets/real/biz/115.jpg" alt="인천광역시 기념식 포토월" loading="lazy"></div><div class="cap"><div class="k">Public</div><h3>인천광역시 기념식 포토월</h3><p>실사 출력 백월과 골드 · 블루 풍선</p></div></a>
+      <a class="work reveal" data-c="sch" href="assets/real/sch/050.jpg" data-lb><div class="ph"><img src="assets/real/sch/050.jpg" alt="개원 5주년 포토존" loading="lazy"></div><div class="cap"><div class="k">Kindergarten</div><h3>개원 5주년 포토존</h3><p>구름과 하우스 풍선, 숫자 오브제</p></div></a>
+      <a class="work reveal" data-c="hel" data-delay="1" href="assets/real/hel/007.jpg" data-lb><div class="ph"><img src="assets/real/hel/007.jpg" alt="첫돌 레터링 풍선" loading="lazy"></div><div class="cap"><div class="k">Lettering</div><h3>첫돌 레터링 풍선</h3><p>투명 버블 풍선에 문구 인쇄</p></div></a>
+      <a class="work reveal" data-c="biz" data-delay="2" href="assets/real/biz/120.jpg" data-lb><div class="ph"><img src="assets/real/biz/120.jpg" alt="야놀자 19주년 장식" loading="lazy"></div><div class="cap"><div class="k">Anniversary</div><h3>야놀자 19주년 장식</h3><p>옐로 숫자 풍선과 레터링 큐브</p></div></a>
+      <a class="work reveal" data-c="biz" href="assets/real/biz/044.jpg" data-lb><div class="ph"><img src="assets/real/biz/044.jpg" alt="올리브영 플라워 벌룬" loading="lazy"></div><div class="cap"><div class="k">Brand</div><h3>올리브영 플라워 벌룬</h3><p>꽃과 풍선을 섞은 대형 오브제</p></div></a>
+      <a class="work reveal" data-c="fam" data-delay="1" href="assets/real/fam/013.jpg" data-lb><div class="ph"><img src="assets/real/fam/013.jpg" alt="칠순 잔치 포토존" loading="lazy"></div><div class="cap"><div class="k">Family</div><h3>칠순 잔치 포토존</h3><p>블루 그린 산수 패널과 라이트 숫자</p></div></a>
+      <a class="work reveal" data-c="sch" data-delay="2" href="assets/real/sch/056.jpg" data-lb><div class="ph"><img src="assets/real/sch/056.jpg" alt="졸업식 플라워 포토월" loading="lazy"></div><div class="cap"><div class="k">Graduation</div><h3>졸업식 플라워 포토월</h3><p>핑크 꽃풍선 프레임과 문구 패널</p></div></a>
     </div>
-    <div class="more"><a href="#">사진 더 보기</a></div>
+    <div class="more"><a href="#gallery">현장 사진 전체 보기</a></div>
   </div>
 </section>
 
 <section class="strip" aria-label="현장 사진 모음">
   <div class="row">
-    <img src="assets/photos/p01.jpg" alt=""><img src="assets/photos/p03.jpg" alt=""><img src="assets/photos/p05.jpg" alt=""><img src="assets/photos/p07.jpg" alt=""><img src="assets/photos/p09.jpg" alt=""><img src="assets/photos/p10.jpg" alt=""><img src="assets/photos/p11.jpg" alt=""><img src="assets/photos/p13.jpg" alt=""><img src="assets/photos/p15.jpg" alt=""><img src="assets/photos/p16.jpg" alt="">
-    <img src="assets/photos/p01.jpg" alt=""><img src="assets/photos/p03.jpg" alt=""><img src="assets/photos/p05.jpg" alt=""><img src="assets/photos/p07.jpg" alt=""><img src="assets/photos/p09.jpg" alt=""><img src="assets/photos/p10.jpg" alt=""><img src="assets/photos/p11.jpg" alt=""><img src="assets/photos/p13.jpg" alt=""><img src="assets/photos/p15.jpg" alt=""><img src="assets/photos/p16.jpg" alt="">
+    <img src="assets/real/biz/t/089.jpg" alt="" loading="lazy"><img src="assets/real/fam/t/012.jpg" alt="" loading="lazy"><img src="assets/real/biz/t/039.jpg" alt="" loading="lazy"><img src="assets/real/biz/t/108.jpg" alt="" loading="lazy"><img src="assets/real/sch/t/030.jpg" alt="" loading="lazy"><img src="assets/real/biz/t/013.jpg" alt="" loading="lazy"><img src="assets/real/biz/t/019.jpg" alt="" loading="lazy"><img src="assets/real/sch/t/074.jpg" alt="" loading="lazy"><img src="assets/real/sch/t/001.jpg" alt="" loading="lazy"><img src="assets/real/biz/t/025.jpg" alt="" loading="lazy"><img src="assets/real/biz/t/100.jpg" alt="" loading="lazy"><img src="assets/real/sch/t/013.jpg" alt="" loading="lazy">
+    <img src="assets/real/biz/t/089.jpg" alt="" loading="lazy"><img src="assets/real/fam/t/012.jpg" alt="" loading="lazy"><img src="assets/real/biz/t/039.jpg" alt="" loading="lazy"><img src="assets/real/biz/t/108.jpg" alt="" loading="lazy"><img src="assets/real/sch/t/030.jpg" alt="" loading="lazy"><img src="assets/real/biz/t/013.jpg" alt="" loading="lazy"><img src="assets/real/biz/t/019.jpg" alt="" loading="lazy"><img src="assets/real/sch/t/074.jpg" alt="" loading="lazy"><img src="assets/real/sch/t/001.jpg" alt="" loading="lazy"><img src="assets/real/biz/t/025.jpg" alt="" loading="lazy"><img src="assets/real/biz/t/100.jpg" alt="" loading="lazy"><img src="assets/real/sch/t/013.jpg" alt="" loading="lazy">
   </div>
   <div class="row rev">
-    <img src="assets/photos/p19.jpg" alt=""><img src="assets/photos/p22.jpg" alt=""><img src="assets/photos/p25.jpg" alt=""><img src="assets/photos/p29.jpg" alt=""><img src="assets/photos/p32.jpg" alt=""><img src="assets/photos/p33.jpg" alt=""><img src="assets/photos/p35.jpg" alt=""><img src="assets/photos/p37.jpg" alt=""><img src="assets/photos/p39.jpg" alt=""><img src="assets/photos/p40.jpg" alt="">
-    <img src="assets/photos/p19.jpg" alt=""><img src="assets/photos/p22.jpg" alt=""><img src="assets/photos/p25.jpg" alt=""><img src="assets/photos/p29.jpg" alt=""><img src="assets/photos/p32.jpg" alt=""><img src="assets/photos/p33.jpg" alt=""><img src="assets/photos/p35.jpg" alt=""><img src="assets/photos/p37.jpg" alt=""><img src="assets/photos/p39.jpg" alt=""><img src="assets/photos/p40.jpg" alt="">
+    <img src="assets/real/biz/t/015.jpg" alt="" loading="lazy"><img src="assets/real/fam/t/002.jpg" alt="" loading="lazy"><img src="assets/real/biz/t/136.jpg" alt="" loading="lazy"><img src="assets/real/biz/t/055.jpg" alt="" loading="lazy"><img src="assets/real/biz/t/010.jpg" alt="" loading="lazy"><img src="assets/real/biz/t/023.jpg" alt="" loading="lazy"><img src="assets/real/biz/t/118.jpg" alt="" loading="lazy"><img src="assets/real/biz/t/114.jpg" alt="" loading="lazy"><img src="assets/real/biz/t/018.jpg" alt="" loading="lazy"><img src="assets/real/biz/t/062.jpg" alt="" loading="lazy"><img src="assets/real/biz/t/024.jpg" alt="" loading="lazy"><img src="assets/real/sch/t/005.jpg" alt="" loading="lazy">
+    <img src="assets/real/biz/t/015.jpg" alt="" loading="lazy"><img src="assets/real/fam/t/002.jpg" alt="" loading="lazy"><img src="assets/real/biz/t/136.jpg" alt="" loading="lazy"><img src="assets/real/biz/t/055.jpg" alt="" loading="lazy"><img src="assets/real/biz/t/010.jpg" alt="" loading="lazy"><img src="assets/real/biz/t/023.jpg" alt="" loading="lazy"><img src="assets/real/biz/t/118.jpg" alt="" loading="lazy"><img src="assets/real/biz/t/114.jpg" alt="" loading="lazy"><img src="assets/real/biz/t/018.jpg" alt="" loading="lazy"><img src="assets/real/biz/t/062.jpg" alt="" loading="lazy"><img src="assets/real/biz/t/024.jpg" alt="" loading="lazy"><img src="assets/real/sch/t/005.jpg" alt="" loading="lazy">
   </div>
 </section>
+
+<section class="gallery" id="gallery">
+  <div class="wrap">
+    <div class="eyebrow reveal">Gallery</div>
+    <h2 class="h2 reveal" data-delay="1">현장 사진 모음</h2>
+    <p class="lead reveal" data-delay="2">소로롱이 직접 꾸민 현장 사진을 분류별로 모았습니다. 사진을 누르면 크게 볼 수 있어요.</p>
+    <div class="tabs gtabs" data-gtabs><button class="on" data-g="all">전체 <i>279</i></button><button data-g="biz">기업 · 관공서 <i>137</i></button><button data-g="sch">학교 · 유치원 <i>94</i></button><button data-g="fam">돌잔치 · 개인 <i>18</i></button><button data-g="wrt">벌룬화환 <i>15</i></button><button data-g="flw">자이언트플라워 <i>5</i></button><button data-g="hel">헬륨 · 레터링 <i>10</i></button></div>
+    <div class="ggrid" data-ggrid></div>
+    <div class="gmore"><button data-gmore>사진 더 보기 <span></span></button></div>
+  </div>
+</section>
+
+<div class="lb" data-lbox hidden><button class="x" aria-label="닫기">×</button><button class="pv" aria-label="이전 사진">‹</button><img alt=""><button class="nx" aria-label="다음 사진">›</button><div class="ct"></div></div>
 
 <section class="faq" id="faq">
   <div class="wrap">
@@ -384,6 +422,33 @@ footer img{height:22px;width:auto;opacity:.9}
     tabs.forEach(function(x){x.classList.remove('on')}); b.classList.add('on');
     var f=b.dataset.f; works.forEach(function(w){ w.classList.toggle('hide', f!=='all' && w.dataset.c!==f); if(!w.classList.contains('hide')) w.classList.add('in'); });
   }); });
+  // 전체 갤러리 + 확대 보기
+  var G=[["biz",1],["biz",2],["biz",3],["biz",4],["biz",5],["biz",6],["biz",7],["biz",8],["biz",9],["biz",10],["biz",11],["biz",12],["biz",13],["biz",14],["biz",15],["biz",16],["biz",17],["biz",18],["biz",19],["biz",20],["biz",21],["biz",22],["biz",23],["biz",24],["biz",25],["biz",26],["biz",27],["biz",28],["biz",29],["biz",30],["biz",31],["biz",32],["biz",33],["biz",34],["biz",35],["biz",36],["biz",37],["biz",38],["biz",39],["biz",40],["biz",41],["biz",42],["biz",43],["biz",44],["biz",45],["biz",46],["biz",47],["biz",48],["biz",49],["biz",50],["biz",51],["biz",52],["biz",53],["biz",54],["biz",55],["biz",56],["biz",57],["biz",58],["biz",59],["biz",60],["biz",61],["biz",62],["biz",63],["biz",64],["biz",65],["biz",66],["biz",67],["biz",68],["biz",69],["biz",70],["biz",71],["biz",72],["biz",73],["biz",74],["biz",75],["biz",76],["biz",77],["biz",80],["biz",85],["biz",86],["biz",87],["biz",88],["biz",89],["biz",90],["biz",91],["biz",92],["biz",93],["biz",94],["biz",95],["biz",96],["biz",97],["biz",98],["biz",99],["biz",100],["biz",101],["biz",102],["biz",103],["biz",104],["biz",105],["biz",106],["biz",107],["biz",108],["biz",109],["biz",110],["biz",111],["biz",112],["biz",113],["biz",114],["biz",115],["biz",116],["biz",117],["biz",118],["biz",119],["biz",120],["biz",121],["biz",122],["biz",123],["biz",124],["biz",125],["biz",126],["biz",127],["biz",128],["biz",129],["biz",130],["biz",131],["biz",132],["biz",133],["biz",134],["biz",135],["biz",136],["biz",137],["biz",138],["biz",139],["biz",140],["biz",141],["biz",142],["biz",143],["sch",1],["sch",2],["sch",3],["sch",4],["sch",5],["sch",6],["sch",7],["sch",8],["sch",9],["sch",10],["sch",11],["sch",12],["sch",13],["sch",14],["sch",15],["sch",16],["sch",17],["sch",18],["sch",19],["sch",20],["sch",21],["sch",22],["sch",23],["sch",24],["sch",25],["sch",26],["sch",27],["sch",28],["sch",29],["sch",30],["sch",31],["sch",32],["sch",33],["sch",34],["sch",35],["sch",36],["sch",37],["sch",38],["sch",39],["sch",40],["sch",41],["sch",42],["sch",43],["sch",44],["sch",45],["sch",46],["sch",47],["sch",48],["sch",49],["sch",50],["sch",51],["sch",52],["sch",53],["sch",54],["sch",55],["sch",56],["sch",57],["sch",58],["sch",59],["sch",60],["sch",61],["sch",62],["sch",63],["sch",64],["sch",65],["sch",66],["sch",67],["sch",68],["sch",69],["sch",70],["sch",71],["sch",72],["sch",73],["sch",74],["sch",75],["sch",76],["sch",77],["sch",78],["sch",79],["sch",80],["sch",81],["sch",82],["sch",83],["sch",84],["sch",85],["sch",86],["sch",87],["sch",88],["sch",89],["sch",90],["sch",91],["sch",92],["sch",93],["sch",94],["fam",1],["fam",2],["fam",3],["fam",4],["fam",5],["fam",6],["fam",7],["fam",8],["fam",9],["fam",10],["fam",11],["fam",12],["fam",13],["fam",14],["fam",15],["fam",16],["fam",17],["fam",18],["wrt",1],["wrt",2],["wrt",3],["wrt",4],["wrt",5],["wrt",6],["wrt",7],["wrt",8],["wrt",9],["wrt",10],["wrt",11],["wrt",12],["wrt",13],["wrt",14],["wrt",15],["flw",1],["flw",2],["flw",3],["flw",4],["flw",5],["hel",1],["hel",2],["hel",3],["hel",4],["hel",5],["hel",6],["hel",7],["hel",8],["hel",9],["hel",10]], gl={biz:'기업 · 관공서',sch:'학교 · 유치원',fam:'돌잔치 · 개인',wrt:'벌룬화환',flw:'자이언트플라워',hel:'헬륨 · 레터링'};
+  var grid=document.querySelector('[data-ggrid]'), more=document.querySelector('[data-gmore]'), gtabs=document.querySelectorAll('[data-gtabs] button');
+  var cur='all', shown=0, STEP=window.innerWidth<640?18:24, list=G;
+  function src(x,t){ var n=('00'+x[1]).slice(-3); return 'assets/real/'+x[0]+'/'+(t?'t/':'')+n+'.jpg'; }
+  function render(reset){
+    if(reset){ grid.innerHTML=''; shown=0; list=cur==='all'?G:G.filter(function(x){return x[0]===cur}); }
+    var end=Math.min(list.length,shown+STEP), frag=document.createDocumentFragment();
+    for(var k=shown;k<end;k++){ var a=document.createElement('a'); a.href=src(list[k]); a.dataset.i=k; a.innerHTML='<img src="'+src(list[k],1)+'" alt="'+gl[list[k][0]]+' 현장 사진" loading="lazy">'; frag.appendChild(a); }
+    grid.appendChild(frag); shown=end;
+    more.parentNode.style.display=shown>=list.length?'none':''; more.querySelector('span').textContent='('+shown+' / '+list.length+')';
+  }
+  gtabs.forEach(function(b){ b.addEventListener('click',function(){ gtabs.forEach(function(x){x.classList.remove('on')}); b.classList.add('on'); cur=b.dataset.g; render(true); }); });
+  more.addEventListener('click',function(){render(false)});
+  render(true);
+  var lb=document.querySelector('[data-lbox]'), lbi=lb.querySelector('img'), lbc=lb.querySelector('.ct'), lbl=[], li=0;
+  function show(n){ li=(n+lbl.length)%lbl.length; lbi.src=lbl[li]; lbc.textContent=(li+1)+' / '+lbl.length; }
+  function open(arr,n){ lbl=arr; lb.hidden=false; document.body.style.overflow='hidden'; show(n); }
+  function close(){ lb.hidden=true; document.body.style.overflow=''; lbi.removeAttribute('src'); }
+  grid.addEventListener('click',function(e){ var a=e.target.closest('a'); if(!a) return; e.preventDefault(); open(list.map(function(x){return src(x)}), +a.dataset.i); });
+  document.querySelector('[data-works]').addEventListener('click',function(e){ var a=e.target.closest('a[data-lb]'); if(!a) return; e.preventDefault(); var vis=[].slice.call(document.querySelectorAll('[data-works] .work:not(.hide)')); open(vis.map(function(w){return w.getAttribute('href')}), vis.indexOf(a)); });
+  lb.querySelector('.x').onclick=close; lb.querySelector('.pv').onclick=function(){show(li-1)}; lb.querySelector('.nx').onclick=function(){show(li+1)};
+  lb.addEventListener('click',function(e){ if(e.target===lb) close(); });
+  document.addEventListener('keydown',function(e){ if(lb.hidden) return; if(e.key==='Escape') close(); if(e.key==='ArrowLeft') show(li-1); if(e.key==='ArrowRight') show(li+1); });
+  // 서비스 카드를 누르면 갤러리 분류로 이동
+  var svcMap=['biz','fam','hel','wrt','sch','biz'];
+  document.querySelectorAll('.svc-grid .svc:not(.ask)').forEach(function(c,n){ c.addEventListener('click',function(){ var b=document.querySelector('[data-gtabs] button[data-g="'+svcMap[n]+'"]'); if(b) b.click(); }); });
   // 상담 접수 (초안: 전송 없음)
   var form=document.querySelector('[data-form]');
   form.addEventListener('submit',function(e){ e.preventDefault(); if(!form.checkValidity()){ form.reportValidity(); return; } form.classList.add('sent'); });
