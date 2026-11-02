@@ -52,8 +52,8 @@ def page_head(title, desc):
 <title>%s | 소로롱 이벤트&amp;벌룬</title>
 <meta name="description" content="%s">
 <link rel="stylesheet" href="assets/common.css">
-<link rel="stylesheet" href="assets/f.css">
-<link rel="stylesheet" href="assets/f-sub.css">
+<link rel="stylesheet" href="assets/f.css?v=1102">
+<link rel="stylesheet" href="assets/f-sub.css?v=1102">
 </head>
 <body>
 ''' % (title, desc)
@@ -173,7 +173,7 @@ def menu_page(p):
 
 %s
 ''' % (header(p['slug']), QUICK, phero(p), p['h2'], p['intro'], incl, items, gallery(p), steps(), faq(p['faq']), CTA, others(p['slug']))
-    return page_head(p['name'], p['sub']) + body + FOOTER + '\n<script src="assets/common.js"></script>\n<script src="assets/f-gallery.js"></script>\n</body>\n</html>\n'
+    return page_head(p['name'], p['sub']) + body + FOOTER + '\n<script src="assets/common.js?v=1102"></script>\n<script src="assets/f-gallery.js?v=1102"></script>\n</body>\n</html>\n'
 
 def contact_page():
     p = {'name': '상담문의', 'en': 'Contact', 'hero': ('biz', 40), 'h1': '어떤 행사든 편하게 물어보세요', 'sub': '행사 날짜와 장소, 원하는 분위기를 남겨주시면 어울리는 연출과 견적을 제안드립니다.'}
@@ -220,7 +220,7 @@ def contact_page():
 (function(){ var form=document.querySelector('[data-form]'); form.addEventListener('submit',function(e){ e.preventDefault(); if(!form.checkValidity()){ form.reportValidity(); return; } form.classList.add('sent'); });
   var t=new URLSearchParams(location.search).get('type'); if(t){ var s=document.getElementById('f-type'); [].forEach.call(s.options,function(o){ if(o.text===t) s.value=o.value; }); } })();
 </script>'''
-    return page_head('상담문의', p['sub']) + body + FOOTER + '\n<script src="assets/common.js"></script>\n' + js + '\n</body>\n</html>\n'
+    return page_head('상담문의', p['sub']) + body + FOOTER + '\n<script src="assets/common.js?v=1102"></script>\n' + js + '\n</body>\n</html>\n'
 
 PRINT = [('sch', n) for n in (25, 29, 37, 46, 71, 78, 12)] + [('biz', n) for n in (5, 11, 33, 60, 96, 101, 115, 125)]
 RENTAL = [('biz', n) for n in (62, 127, 141, 142, 63, 99, 89, 117, 88, 111, 132)] + [('sch', n) for n in (3, 39, 91)]

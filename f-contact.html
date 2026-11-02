@@ -6,8 +6,8 @@
 <title>상담문의 | 소로롱 이벤트&amp;벌룬</title>
 <meta name="description" content="행사 날짜와 장소, 원하는 분위기를 남겨주시면 어울리는 연출과 견적을 제안드립니다.">
 <link rel="stylesheet" href="assets/common.css">
-<link rel="stylesheet" href="assets/f.css">
-<link rel="stylesheet" href="assets/f-sub.css">
+<link rel="stylesheet" href="assets/f.css?v=1102">
+<link rel="stylesheet" href="assets/f-sub.css?v=1102">
 </head>
 <body>
 <header class="hdr scrolled" data-header>
@@ -130,7 +130,7 @@
     <div>© 2026 sororong. All rights reserved.</div>
   </div>
 </footer>
-<script src="assets/common.js"></script>
+<script src="assets/common.js?v=1102"></script>
 <script>
 (function(){ var form=document.querySelector('[data-form]'); form.addEventListener('submit',function(e){ e.preventDefault(); if(!form.checkValidity()){ form.reportValidity(); return; } form.classList.add('sent'); });
   var t=new URLSearchParams(location.search).get('type'); if(t){ var s=document.getElementById('f-type'); [].forEach.call(s.options,function(o){ if(o.text===t) s.value=o.value; }); } })();

@@ -6,7 +6,7 @@
 <title>소로롱 벌룬 F안 포토 퍼스트</title>
 <meta name="description" content="기업·관공서·학교 행사부터 돌잔치까지. 소로롱 이벤트&벌룬의 현장 사진과 상담 안내.">
 <link rel="stylesheet" href="assets/common.css">
-<link rel="stylesheet" href="assets/f.css">
+<link rel="stylesheet" href="assets/f.css?v=1102">
 </head>
 <body>
 <header class="hdr" data-header>
@@ -220,7 +220,7 @@
     <div>© 2026 sororong. All rights reserved.</div>
   </div>
 </footer>
-<script src="assets/common.js"></script>
+<script src="assets/common.js?v=1102"></script>
 <script>
 (function(){
   // 메인 슬라이드
@@ -250,7 +250,7 @@
   more.addEventListener('click',function(){render(false)});
   render(true);
   var lb=document.querySelector('[data-lbox]'), lbi=lb.querySelector('img'), lbc=lb.querySelector('.ct'), lbl=[], li=0;
-  function show(n){ li=(n+lbl.length)%lbl.length; lbi.src=lbl[li]; lbc.textContent=(li+1)+' / '+lbl.length; }
+  function show(n){ li=(n+lbl.length)%lbl.length; lbi.src=lbl[li]; lbc.textContent=(li+1)+' / '+lbl.length; [li+1,li-1].forEach(function(k){ (new Image()).src=lbl[(k+lbl.length)%lbl.length]; }); }
   function open(arr,n){ lbl=arr; lb.hidden=false; document.body.style.overflow='hidden'; show(n); }
   function close(){ lb.hidden=true; document.body.style.overflow=''; lbi.removeAttribute('src'); }
   grid.addEventListener('click',function(e){ var a=e.target.closest('a'); if(!a) return; e.preventDefault(); open(list.map(function(x){return src(x)}), +a.dataset.i); });
@@ -258,6 +258,14 @@
   lb.querySelector('.x').onclick=close; lb.querySelector('.pv').onclick=function(){show(li-1)}; lb.querySelector('.nx').onclick=function(){show(li+1)};
   lb.addEventListener('click',function(e){ if(e.target===lb) close(); });
   document.addEventListener('keydown',function(e){ if(lb.hidden) return; if(e.key==='Escape') close(); if(e.key==='ArrowLeft') show(li-1); if(e.key==='ArrowRight') show(li+1); });
+  // 모바일 스와이프: 좌우로 넘기기, 아래로 내려 닫기
+  var tx=0,ty=0,dx=0,dy=0,touching=false;
+  lb.addEventListener('touchstart',function(e){ if(e.touches.length!==1) return; touching=true; tx=e.touches[0].clientX; ty=e.touches[0].clientY; dx=dy=0; lbi.style.transition='none'; },{passive:true});
+  lb.addEventListener('touchmove',function(e){ if(!touching) return; dx=e.touches[0].clientX-tx; dy=e.touches[0].clientY-ty; if(Math.abs(dx)>Math.abs(dy)) lbi.style.transform='translateX('+dx+'px)'; else if(dy>0) lbi.style.transform='translateY('+dy+'px)'; e.preventDefault(); },{passive:false});
+  lb.addEventListener('touchend',function(){ if(!touching) return; touching=false; lbi.style.transition='transform .25s ease';
+    if(Math.abs(dx)>50 && Math.abs(dx)>Math.abs(dy)){ var d=dx<0?1:-1; lbi.style.transform='translateX('+(-d*window.innerWidth)+'px)'; setTimeout(function(){ lbi.style.transition='none'; show(li+d); lbi.style.transform='translateX('+(d*window.innerWidth*.4)+'px)'; requestAnimationFrame(function(){ requestAnimationFrame(function(){ lbi.style.transition='transform .25s ease'; lbi.style.transform=''; }); }); },180); }
+    else if(dy>90 && dy>Math.abs(dx)){ lbi.style.transform=''; close(); }
+    else lbi.style.transform=''; });
   // 상담 접수 (초안: 전송 없음)
   var form=document.querySelector('[data-form]');
   form.addEventListener('submit',function(e){ e.preventDefault(); if(!form.checkValidity()){ form.reportValidity(); return; } form.classList.add('sent'); });
