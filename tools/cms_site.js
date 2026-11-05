@@ -167,7 +167,9 @@
   if (popup) {
     var key = 'sororong-popup-hide', today = new Date(Date.now() + 9 * 3600000).toISOString().slice(0, 10), hide = null;
     try { hide = localStorage.getItem(key); } catch (e) {}
-    var start = popup.dataset.start, end = popup.dataset.end;
+    // 2026-12-01 · 2026.12.1 · 2026/12/01 모두 받는다. 읽을 수 없으면 제한 없음으로 본다.
+    var day = function (v) { var m = /^\s*(\d{4})\D+(\d{1,2})\D+(\d{1,2})/.exec(v || ''); return m ? m[1] + '-' + ('0' + m[2]).slice(-2) + '-' + ('0' + m[3]).slice(-2) : ''; };
+    var start = day(popup.dataset.start), end = day(popup.dataset.end);
     if (hide !== today && (!start || start <= today) && (!end || today <= end)) popup.hidden = false;
     var shut = function () { popup.hidden = true; };
     $('[data-popup-close]', popup).addEventListener('click', shut);
