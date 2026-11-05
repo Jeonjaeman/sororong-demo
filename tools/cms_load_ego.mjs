@@ -97,7 +97,11 @@ async function upload(rel) {
   return intent.mediaId
 }
 
-await openMaster()
+// 마스터 접속이 살아 있으면 다시 열지 않는다(운영자 로그인이 풀려 있어도 이어서 올린다).
+await page.goto('https://tengtengsoft.kr/cms')
+await page.waitForTimeout(2500)
+const alive = await raw('GET', '/api/cms/site-content')
+if (alive.status !== 200) await openMaster()
 await assertSpace()
 log('소로롱 공간 확인')
 const seed = JSON.parse(await readFile(HERE + '/cms_seed.json', 'utf8'))
@@ -122,6 +126,11 @@ const theme = { ...loaded.theme, siteContent: { ...loaded.content, ...content } 
 await api('PUT', '/api/cms/theme', { theme, themeRev: loaded.themeRev })
 log('저장 끝')
 const docs = await api('GET', '/api/cms/documents')
-await api('POST', '/api/cms/site-content/publish', { baseTransitionNo: docs.baseTransitionNo })
+// 공개는 멱등키가 필수다.
+const published = await page.evaluate(async (base) => {
+  const res = await fetch('/api/cms/site-content/publish', { method: 'POST', credentials: 'same-origin', headers: { 'content-type': 'application/json', accept: 'application/json', 'Idempotency-Key': crypto.randomUUID() }, body: JSON.stringify({ baseTransitionNo: base }) })
+  return res.status
+}, docs.baseTransitionNo)
+if (published >= 300) throw new Error(`공개 실패 ${published}`)
 log('공개 끝')
 await task.finish({ keep: [] }).catch(() => {})

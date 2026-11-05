@@ -25,10 +25,10 @@ const LOGIN = arg('login'), DRY = args.includes('--dry'), NO_PUBLISH = args.incl
 if (!LOGIN && !DRY) { console.error("사용: SORORONG_CMS_PW='…' node tools/cms_load.mjs --login <아이디>"); process.exit(2) }
 
 let cookie = ''
-async function api(method, path, body) {
+async function api(method, path, body, extra = {}) {
   const res = await fetch(`${BASE}${path}`, {
     method,
-    headers: { accept: 'application/json', origin: BASE, referer: `${BASE}/cms`, ...(cookie ? { cookie } : {}), ...(body !== undefined ? { 'content-type': 'application/json' } : {}) },
+    headers: { accept: 'application/json', origin: BASE, referer: `${BASE}/cms`, ...(cookie ? { cookie } : {}), ...(body !== undefined ? { 'content-type': 'application/json' } : {}), ...extra },
     body: body === undefined ? undefined : typeof body === 'string' ? body : JSON.stringify(body),
     redirect: 'manual',
   })
@@ -105,6 +105,6 @@ await api('PUT', '/api/cms/theme', { theme, themeRev: loaded.themeRev })
 console.log('저장 끝')
 if (!NO_PUBLISH) {
   const docs = await api('GET', '/api/cms/documents')
-  await api('POST', '/api/cms/site-content/publish', { baseTransitionNo: docs.baseTransitionNo })
+  await api('POST', '/api/cms/site-content/publish', { baseTransitionNo: docs.baseTransitionNo }, { 'idempotency-key': `sororong-${Date.now()}` })
   console.log('공개 끝')
 }
