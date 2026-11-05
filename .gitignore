@@ -1,3 +1,5 @@
 README.md
 assets/photos/_분류.md
 .omc/
+tools/__pycache__/
+tools/cms_media_map.json

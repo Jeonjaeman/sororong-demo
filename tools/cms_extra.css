@@ -1,0 +1,27 @@
+
+/* CMS 사이트 전용 */
+.ggrid a[hidden]{display:none}
+.tabs [data-g][hidden]{display:none}
+.hdr .nav a.on{color:var(--pink)}
+.form input[type=file]{padding:10px 12px;background:#fff}
+.form .agree a{text-decoration:underline}
+.form .tt-form-status{margin-top:12px;font-size:14px;color:#b53a5c}
+.form .tt-form-status:empty{display:none}
+.form .cf-turnstile{margin-top:12px}
+main .policy{padding:150px 0 90px}
+.policy .wrap{max-width:760px}
+.policy h1{font-size:clamp(28px,3vw,38px);font-weight:700;letter-spacing:-.02em}
+.policy h2{font-size:18px;font-weight:600;margin-top:32px}
+.policy p{margin-top:10px;color:#444;line-height:1.75}
+.policy a{text-decoration:underline}
+footer a{text-decoration:underline}
+[data-doc]{padding:150px 0 90px}
+/* 이벤트 팝업 */
+.popup{position:fixed;inset:0;z-index:9000;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(10,10,14,.55)}
+.popup[hidden]{display:none}
+.popup__box{width:min(460px,100%);background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 24px 70px -20px rgba(0,0,0,.55)}
+.popup__box img{width:100%;max-height:72vh;object-fit:contain;background:#fff}
+.popup__foot{display:flex;justify-content:space-between;border-top:1px solid var(--line)}
+.popup__foot button{flex:1;min-height:50px;font-size:14px;color:#444}
+.popup__foot button+button{border-left:1px solid var(--line);font-weight:600;color:var(--ink)}
+@media (max-width:1000px){main .policy{padding:104px 0 70px}[data-doc]{padding:104px 0 70px}}
