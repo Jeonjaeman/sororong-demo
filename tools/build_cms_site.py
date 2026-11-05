@@ -108,6 +108,7 @@ for key, schema in [
     ('phone', {'type': 'text', 'label': '전화번호', 'maxLength': 20, 'placeholder': '010-0000-0000'}),
     ('kakaoUrl', {'type': 'url', 'label': '카카오톡 채널 주소'}),
     ('instagramUrl', {'type': 'url', 'label': '인스타그램 주소'}),
+    ('blogUrl', {'type': 'url', 'label': '네이버 블로그 주소', 'help': '화면에는 보이지 않고, 검색엔진이 같은 업체로 알아보는 데 쓰입니다.'}),
     ('address', {'type': 'text', 'label': '주소', 'maxLength': 120}),
     ('bizInfo', {'type': 'text', 'label': '사업자 정보(맨 아래 표시)', 'maxLength': 160}),
     ('privacyOwner', {'type': 'text', 'label': '개인정보 보호책임자', 'maxLength': 60}),
@@ -117,12 +118,12 @@ add('stats', {'type': 'list', 'label': '실적 숫자', 'maxItems': 4, 'minItems
 add('clients', {'type': 'list', 'label': '함께한 고객사', 'maxItems': 60, 'itemLabelField': 'name', 'help': '메인 화면에서 옆으로 흐릅니다. 로고를 넣으면 이름 대신 로고가 보입니다.', 'item': {'order': ['name', 'logo'], 'fields': {'name': {'type': 'text', 'label': '이름', 'maxLength': 40, 'required': True}, 'logo': {'type': 'image', 'label': '로고(선택)', 'maxEdge': 600}}}})
 add('faq', {'type': 'list', 'label': '자주 묻는 질문', 'maxItems': 20, 'itemLabelField': 'question', 'item': {'order': ['question', 'answer'], 'fields': {
     'question': {'type': 'text', 'label': '질문', 'maxLength': 120, 'required': True}, 'answer': {'type': 'text', 'label': '답변', 'maxLength': 400, 'required': True}}}})
-sections.append({'key': 'settings', 'label': '연락처 · 실적', 'fields': ['phone', 'kakaoUrl', 'instagramUrl', 'address', 'bizInfo', 'privacyOwner', 'stats', 'clients', 'faq']})
+sections.append({'key': 'settings', 'label': '연락처 · 실적', 'fields': ['phone', 'kakaoUrl', 'instagramUrl', 'blogUrl', 'address', 'bizInfo', 'privacyOwner', 'stats', 'clients', 'faq']})
 
 FAQ_ALL = re.findall(r'<details(?: open)?><summary>(.*?)</summary><div class="a">(.*?)</div></details>', F)
 STATS = [{'value': v, 'suffix': re.sub(r'<.*?>', '', s), 'label': l} for v, s, l in re.findall(r'<div class="stat reveal"[^>]*><b><span data-count="([^"]+)">0</span>(.*?)</b><span>([^<]+)</span></div>', F)]
 CLIENTS = [{'name': n.replace('&#39;', "'")} for n in re.findall(r'<span(?: class="ko")?>([^<]+)</span>', re.search(r'<div class="marquee__track">(.*?)</div>', F, re.S).group(1))]
-defaults = {'phone': '', 'kakaoUrl': '', 'instagramUrl': '', 'address': '경기도 광주시', 'bizInfo': '소로롱 이벤트&벌룬 · 경기도 광주시', 'privacyOwner': '소로롱 대표', 'popupOn': False,
+defaults = {'phone': '', 'kakaoUrl': '', 'instagramUrl': '', 'blogUrl': '', 'address': '경기도 광주시', 'bizInfo': '소로롱 이벤트&벌룬 · 경기도 광주시', 'privacyOwner': '소로롱 대표', 'popupOn': False,
             'stats': STATS, 'clients': CLIENTS, 'faq': [{'question': q, 'answer': a} for q, a in FAQ_ALL], 'heroSlides': [], 'strip': [], 'works': []}
 for g in GAL.values(): defaults[g] = []
 
@@ -217,7 +218,7 @@ def gal_html(cats):
     tabs = ''
     if len(cats) > 1:
         tabs = '<div class="tabs gtabs" data-gtabs><button class="on" data-g="all">전체 <i></i></button>%s</div>' % ''.join('<button data-g="%s">%s <i></i></button>' % (c, GLABEL[c]) for c in cats)
-    cells = ''.join('{{#each content.%s}}<a role="button" tabindex="0" data-full="{{image image}}" data-g="%s"><img src="{{image image}}" alt="{{alt image "%s 현장 사진"}}" loading="lazy"></a>{{/each}}' % (GAL[c], c, GLABEL[c]) for c in cats)
+    cells = ''.join('{{#each content.%s}}<a role="button" tabindex="0" data-full="{{image image}}" data-g="%s"><img src="{{image image}}" alt="{{alt image "소로롱 %s 풍선 장식 현장 사진"}}" loading="lazy"></a>{{/each}}' % (GAL[c], c, GLABEL[c]) for c in cats)
     return tabs, cells
 def gallery(title, lead, cats):
     tabs, cells = gal_html(cats)
@@ -254,6 +255,7 @@ def phero(field, name, en, h1, sub, crumb=None):
 </section>''' % (slot(field, alt=name + ' 현장 사진', lazy=False), name, en, h1, sub)
 def faq_static(items):
     d = ''.join('\n      <details%s><summary>%s</summary><div class="a">%s</div></details>' % (' open' if i == 0 else '', q, a) for i, (q, a) in enumerate(items))
+    ld = json.dumps({'@context': 'https://schema.org', '@type': 'FAQPage', 'mainEntity': [{'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in items]}, ensure_ascii=False)
     return '''<section class="faq">
   <div class="wrap">
     <div class="eyebrow reveal">FAQ</div>
@@ -261,7 +263,8 @@ def faq_static(items):
     <div class="list reveal" data-delay="2">%s
     </div>
   </div>
-</section>''' % d
+  <script type="application/ld+json">%s</script>
+</section>''' % (d, ld)
 
 # ── 페이지 ─────────────────────────────────────────────────────────────────
 pages_out = {}
@@ -428,10 +431,10 @@ site = {
         'consent': '상담 목적의 개인정보 수집 · 이용에 동의합니다.', 'attachments': {'max': 3, 'label': '참고 사진'}, 'success': '접수되었습니다. 남겨주신 연락처로 곧 연락드리겠습니다.'}],
     'admin': {'menus': {'submissions': '상담 문의', 'content': '사진 관리', 'collections': False}, 'content': {'sections': sections}},
     'seo': {'indexable': True, 'industry': 'general', 'organization': {'type': 'LocalBusiness', 'fields': {
-        'name': '소로롱 이벤트&벌룬', 'telephone': '{{content.phone}}', 'address': {'@type': 'PostalAddress', 'streetAddress': '{{content.address}}', 'addressRegion': '경기도', 'addressCountry': 'KR'}, 'areaServed': '서울 · 경기 · 전국 출장', 'sameAs': ['{{content.instagramUrl}}', '{{content.kakaoUrl}}']}},
+        'name': '소로롱 이벤트&벌룬', 'alternateName': 'sororong', 'description': '기업 시상식과 기념식, 브랜드 팝업, 관공서와 학교 행사, 돌잔치의 포토존과 풍선 공간 연출을 맡는 경기 광주의 풍선 이벤트 업체입니다.', 'telephone': '{{content.phone}}', 'address': {'@type': 'PostalAddress', 'addressLocality': '광주시', 'addressRegion': '경기도', 'addressCountry': 'KR'}, 'areaServed': ['서울', '경기', '대한민국'], 'sameAs': ['{{content.instagramUrl}}', '{{content.kakaoUrl}}', '{{content.blogUrl}}']}},
         'summary': '소로롱 이벤트&벌룬은 경기 광주를 기반으로 기업 시상식과 기념식, 브랜드 팝업, 관공서와 학교 행사, 돌잔치의 포토존과 풍선 공간 연출을 디자인부터 설치와 철거까지 직접 맡는 풍선 이벤트 업체입니다.',
-        'facts': ['서비스: 기업 · 관공서 · 학교행사, 돌잔치 · 개인행사, 헬륨 · 인쇄 · 레터링풍선, 자이언트플라워 · 꽃풍선 · 벌룬화환, 폼보드 · 포맥스 · 실사물, 행사장비 렌탈.', '서비스 지역: 서울 · 경기 중심, 전국 출장 설치 가능.'],
-        'faq': {'content': 'faq', 'question': 'question', 'answer': 'answer', 'page': '/'}, 'favicon': 'img/mark-pink.svg', 'ogImage': 'img/og.png'},
+        'facts': ['본사: 경기도 광주시.', '서비스: 기업 · 관공서 · 학교행사, 돌잔치 · 개인행사, 헬륨 · 인쇄 · 레터링풍선, 자이언트플라워 · 꽃풍선 · 벌룬화환, 폼보드 · 포맥스 · 실사물, 행사장비 렌탈.', '서비스 지역: 서울 · 경기 중심, 전국 출장 설치 가능.'],
+        'faq': {'content': 'faq', 'question': 'question', 'answer': 'answer', 'page': '/'}, 'favicon': 'img/mark-pink.svg', 'ogImage': 'img/og.png', 'indexMedia': True},
     'csp': {'styleSrc': ['https://cdn.jsdelivr.net', 'https://fonts.googleapis.com'], 'fontSrc': ['https://cdn.jsdelivr.net', 'https://fonts.gstatic.com']},
 }
 
