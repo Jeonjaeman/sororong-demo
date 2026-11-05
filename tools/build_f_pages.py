@@ -15,9 +15,10 @@ MENU = [  # slug, 메뉴 이름
     ('f-flower.html', '자이언트플라워 · 꽃풍선 · 벌룬화환'),
     ('f-print.html', '폼보드 · 포맥스 · 실사물'),
     ('f-rental.html', '행사장비 렌탈'),
+    ('f-review.html', '서포트 후기'),
     ('f-contact.html', '상담문의'),
 ]
-LABEL = {'biz': '기업 · 관공서', 'sch': '학교 · 유치원', 'fam': '돌잔치 · 개인', 'wrt': '벌룬화환', 'flw': '자이언트플라워', 'hel': '헬륨 · 레터링', 'rnt': '행사장비'}
+LABEL = {'biz': '기업 · 관공서', 'sch': '학교 · 유치원', 'fam': '돌잔치 · 개인', 'wrt': '벌룬화환', 'flw': '자이언트플라워', 'hel': '헬륨 · 레터링', 'rnt': '행사장비', 'rev': '연예인 서포트'}
 
 def header(active):
     lis = ''.join('\n        <li><a href="%s"%s>%s</a></li>' % (s, ' class="on" aria-current="page"' if s == active else '', t) for s, t in MENU)
@@ -53,8 +54,8 @@ def page_head(title, desc):
 <title>%s | 소로롱 이벤트&amp;벌룬</title>
 <meta name="description" content="%s">
 <link rel="stylesheet" href="assets/common.css">
-<link rel="stylesheet" href="assets/f.css?v=1105">
-<link rel="stylesheet" href="assets/f-sub.css?v=1105">
+<link rel="stylesheet" href="assets/f.css?v=11052">
+<link rel="stylesheet" href="assets/f-sub.css?v=11052">
 </head>
 <body>
 ''' % (title, desc)
@@ -175,7 +176,7 @@ def menu_page(p):
 
 %s
 ''' % (header(p['slug']), QUICK, phero(p), p['h2'], p['intro'], incl, items, gallery(p), steps(), faq(p['faq']), CTA, others(p['slug']))
-    return page_head(p['name'], p['sub']) + body + FOOTER + '\n<script src="assets/common.js?v=1105"></script>\n<script src="assets/f-gallery.js?v=1105"></script>\n</body>\n</html>\n'
+    return page_head(p['name'], p['sub']) + body + FOOTER + '\n<script src="assets/common.js?v=11052"></script>\n<script src="assets/f-gallery.js?v=11052"></script>\n</body>\n</html>\n'
 
 def contact_page():
     p = {'name': '상담문의', 'en': 'Contact', 'hero': ('biz', 40), 'h1': '어떤 행사든 편하게 물어보세요', 'sub': '행사 날짜와 장소, 원하는 분위기를 남겨주시면 어울리는 연출과 견적을 제안드립니다.'}
@@ -222,7 +223,7 @@ def contact_page():
 (function(){ var form=document.querySelector('[data-form]'); form.addEventListener('submit',function(e){ e.preventDefault(); if(!form.checkValidity()){ form.reportValidity(); return; } form.classList.add('sent'); });
   var t=new URLSearchParams(location.search).get('type'); if(t){ var s=document.getElementById('f-type'); [].forEach.call(s.options,function(o){ if(o.text===t) s.value=o.value; }); } })();
 </script>'''
-    return page_head('상담문의', p['sub']) + body + FOOTER + '\n<script src="assets/common.js?v=1105"></script>\n' + js + '\n</body>\n</html>\n'
+    return page_head('상담문의', p['sub']) + body + FOOTER + '\n<script src="assets/common.js?v=11052"></script>\n' + js + '\n</body>\n</html>\n'
 
 PRINT = [('sch', n) for n in (25, 29, 37, 46, 71, 78, 12)] + [('biz', n) for n in (5, 11, 33, 60, 96, 101, 115, 125)]
 RENTAL = cat('rnt') + [('biz', n) for n in (62, 127, 141, 142, 63, 99, 89, 117, 88, 111, 132)] + [('sch', n) for n in (3, 39, 91)]
@@ -263,7 +264,7 @@ PAGES = [
   intro='헬륨 풍선 번들, 로고와 문구를 인쇄한 풍선, 이름을 새긴 버블 레터링 풍선까지. 행사장 포인트부터 선물용까지 수량과 용도에 맞춰 제작하고 직접 전달하거나 설치합니다.',
   incl=['헬륨 풍선 번들', '로고 인쇄 풍선', '버블 레터링 풍선', '은박 숫자 · 글자 풍선', '천장 띄우기 연출', '꽃다발과 함께 구성'],
   items=[('hel', 2, '헬륨 풍선 장식', '행사장 테이블과 공간을 채우는 헬륨 번들'),
-         ('hel', 5, '로고 · 문구 풍선', '기념일 문구와 로고를 넣은 맞춤 풍선'),
+         ('hel', 11, '로고 · 문구 풍선', '기념일 문구와 로고를 넣은 맞춤 풍선'),
          ('hel', 7, '버블 레터링 풍선', '투명 버블 풍선에 이름과 축하 문구'),
          ('hel', 10, '은박 하트 · 별 풍선', '선물과 이벤트를 위한 은박 풍선 묶음')],
   photos=cat('hel'),
@@ -313,6 +314,19 @@ PAGES = [
        ('대여 기간은 어떻게 되나요?', '보통 행사 당일 기준이며, 여러 날 행사는 기간에 맞춰 견적을 드립니다.'),
        ('야외 행사에 비가 오면 어떻게 하나요?', '천막과 고정 장비로 대비하고, 기상 상황에 따라 설치 방식을 함께 조율합니다.'),
        ('설치와 철거도 해주시나요?', '네. 운반, 설치, 철거까지 소로롱이 직접 진행합니다.')]),
+ dict(slug='f-review.html', name='연예인 서포트 후기', short='연예인 서포트', en='Celebrity support', hero=('rev', 13), thumb=('rev', 4),
+  h1='연예인 서포트로<br>전한 마음', sub='연예인 생일과 촬영장 응원, 팬 서포트에 쓰인 꽃풍선과 풍선 꽃다발입니다.',
+  h2='받는 분의 하루에<br>어울리는 선물로',
+  intro='소로롱은 연예인 생일과 촬영장 응원, 팬 서포트에 쓰이는 꽃풍선과 풍선 꽃다발, 커피차 · 푸드트럭 장식을 제작합니다. 아래 사진은 소로롱이 준비한 서포트 현장입니다.',
+  incl=['버블 꽃풍선', '풍선 꽃다발', '응원 화환', '커피차 · 푸드트럭 장식', '차량 트렁크 이벤트', '이름 · 응원 문구 레터링'],
+  items=[('rev', 4, '꽃풍선 선물', '크라운과 꽃을 넣은 버블 꽃풍선 선물'),
+         ('rev', 8, '커피차 · 푸드트럭 장식', '응원 현장을 채우는 풍선과 배너 장식'),
+         ('rev', 14, '생일 풍선 꽃다발', '메탈릭 풍선을 섞은 풍성한 꽃다발'),
+         ('rev', 17, '생일 파티 장식', '이름과 문구를 넣은 생일 공간 연출')],
+  photos=cat('rev'),
+  faq=[('소속사나 팬클럽 단체 주문도 되나요?', '네. 수량과 전달 일정을 알려주시면 맞춰 준비합니다.'),
+       ('이름과 응원 문구를 넣을 수 있나요?', '네. 원하는 문구를 버블 풍선이나 리본에 넣어 드립니다.'),
+       ('촬영장이나 행사장으로 전달해 주시나요?', '전달 장소와 시간을 알려주시면 상담 후 방법을 안내해 드립니다.')]),
 ]
 
 for p in PAGES:

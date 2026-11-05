@@ -1,24 +1,16 @@
 {
  "heroSlides": [
   {
-   "file": "assets/real/biz/040.jpg",
-   "alt": "풍선으로 만든 소파와 테이블 포토존"
-  },
-  {
    "file": "assets/real/biz/064.jpg",
    "alt": "크리스마스 마을 풍선 포토존"
   },
   {
-   "file": "assets/real/sch/008.jpg",
-   "alt": "학교 축제 무대 풍선 장식"
+   "file": "assets/real/biz/068.jpg",
+   "alt": "메리 크리스마스 풍선 포토월"
   },
   {
-   "file": "assets/real/biz/123.jpg",
-   "alt": "창립 20주년 기념 포토월"
-  },
-  {
-   "file": "assets/real/biz/130.jpg",
-   "alt": "연말 송년회 레드 골드 포토월"
+   "file": "assets/real/biz/093.jpg",
+   "alt": "골드 풍선과 체크 바닥의 행사 포토존"
   }
  ],
  "cardBiz": {
@@ -44,6 +36,10 @@
  "cardRental": {
   "file": "assets/real/rnt/001.jpg",
   "alt": "행사장비 렌탈"
+ },
+ "cardReview": {
+  "file": "assets/real/rev/004.jpg",
+  "alt": "연예인 서포트 후기"
  },
  "strip": [
   {
@@ -1327,6 +1323,10 @@
  },
  "galHel": [
   {
+   "file": "assets/real/hel/011.jpg",
+   "alt": "로고 · 문구 인쇄 풍선 샘플"
+  },
+  {
    "file": "assets/real/hel/001.jpg",
    "alt": ""
   },
@@ -1376,7 +1376,7 @@
   "alt": "헬륨 풍선 장식"
  },
  "heliumItem2": {
-  "file": "assets/real/hel/005.jpg",
+  "file": "assets/real/hel/011.jpg",
   "alt": "로고 · 문구 풍선"
  },
  "heliumItem3": {
@@ -1666,6 +1666,100 @@
  "rentalItem4": {
   "file": "assets/real/biz/062.jpg",
   "alt": "천막 · 테이블"
+ },
+ "galReview": [
+  {
+   "file": "assets/real/rev/001.jpg",
+   "alt": "트로피와 함께한 꽃다발"
+  },
+  {
+   "file": "assets/real/rev/002.jpg",
+   "alt": "라벤더 플라워 버블 꽃다발"
+  },
+  {
+   "file": "assets/real/rev/003.jpg",
+   "alt": "풍선 포토월과 꽃풍선"
+  },
+  {
+   "file": "assets/real/rev/004.jpg",
+   "alt": "크라운 장식 꽃풍선 선물"
+  },
+  {
+   "file": "assets/real/rev/005.jpg",
+   "alt": "커피차 앞 보랏빛 꽃다발"
+  },
+  {
+   "file": "assets/real/rev/006.jpg",
+   "alt": "보랏빛 생일 풍선 장식"
+  },
+  {
+   "file": "assets/real/rev/007.jpg",
+   "alt": "보랏빛 장미 풍선 꽃다발"
+  },
+  {
+   "file": "assets/real/rev/008.jpg",
+   "alt": "응원 푸드트럭과 풍선 장식"
+  },
+  {
+   "file": "assets/real/rev/009.jpg",
+   "alt": "오렌지 꽃다발 화환"
+  },
+  {
+   "file": "assets/real/rev/010.jpg",
+   "alt": "차량 트렁크 꽃과 하트 장식"
+  },
+  {
+   "file": "assets/real/rev/011.jpg",
+   "alt": "카페 부스 축하 꽃다발"
+  },
+  {
+   "file": "assets/real/rev/012.jpg",
+   "alt": "블랙 · 그린 풍선 조형"
+  },
+  {
+   "file": "assets/real/rev/013.jpg",
+   "alt": "풍선과 선물 세트"
+  },
+  {
+   "file": "assets/real/rev/014.jpg",
+   "alt": "골드 포인트 생일 풍선 꽃다발"
+  },
+  {
+   "file": "assets/real/rev/015.jpg",
+   "alt": "핑크 꽃다발 버블"
+  },
+  {
+   "file": "assets/real/rev/016.jpg",
+   "alt": "촬영장 응원 꽃다발과 음료"
+  },
+  {
+   "file": "assets/real/rev/017.jpg",
+   "alt": "생일 파티 풍선 장식"
+  },
+  {
+   "file": "assets/real/rev/018.jpg",
+   "alt": "풍선과 꽃다발 세트"
+  }
+ ],
+ "reviewHero": {
+  "file": "assets/real/rev/013.jpg",
+  "alt": "연예인 서포트 후기 현장 사진"
+ },
+ "reviewItem1": {
+  "file": "assets/real/rev/004.jpg",
+  "alt": "꽃풍선 선물"
+ },
+ "reviewItem2": {
+  "file": "assets/real/rev/008.jpg",
+  "alt": "커피차 · 푸드트럭 장식"
+ },
+ "reviewItem3": {
+  "file": "assets/real/rev/014.jpg",
+  "alt": "생일 풍선 꽃다발"
+ },
+ "reviewItem4": {
+  "file": "assets/real/rev/017.jpg",
+  "alt": "생일 파티 장식"
  },
  "contactHero": {
   "file": "assets/real/biz/040.jpg",

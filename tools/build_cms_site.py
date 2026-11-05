@@ -18,12 +18,13 @@ F = fp.F; PAGES = fp.PAGES
 ORD = json.load(io.open(os.path.join(ROOT, 'assets/real/_order.json'), encoding='utf-8'))
 CAPS = ORD['caps']
 
-KEY = {'f-biz.html': 'biz', 'f-family.html': 'family', 'f-helium.html': 'helium', 'f-flower.html': 'flower', 'f-print.html': 'print', 'f-rental.html': 'rental'}
-CARD = {'biz': 'cardBiz', 'family': 'cardFamily', 'helium': 'cardHelium', 'flower': 'cardFlower', 'print': 'cardPrint', 'rental': 'cardRental'}
-GAL = {'biz': 'galBiz', 'sch': 'galSch', 'fam': 'galFam', 'wrt': 'galWrt', 'flw': 'galFlw', 'hel': 'galHel', 'prt': 'galPrint', 'rnt': 'galRental'}
-GLABEL = {'biz': '기업 · 관공서', 'sch': '학교 · 유치원', 'fam': '돌잔치 · 개인', 'wrt': '벌룬화환', 'flw': '자이언트플라워', 'hel': '헬륨 · 레터링', 'prt': '폼보드 · 실사물', 'rnt': '행사장비'}
-FULL = {'biz': '기업 · 관공서 · 학교행사', 'family': '돌잔치 · 개인행사', 'helium': '헬륨 · 인쇄 · 레터링풍선', 'flower': '자이언트플라워 · 꽃풍선 · 벌룬화환', 'print': '폼보드 · 포맥스 · 실사물', 'rental': '행사장비 렌탈'}
-SHORT = {'biz': '기업 · 학교 행사', 'family': '돌잔치 · 개인행사', 'helium': '헬륨 · 레터링', 'flower': '꽃풍선 · 벌룬화환', 'print': '폼보드 · 실사물', 'rental': '행사장비 렌탈'}
+KEY = {'f-biz.html': 'biz', 'f-family.html': 'family', 'f-helium.html': 'helium', 'f-flower.html': 'flower', 'f-print.html': 'print', 'f-rental.html': 'rental', 'f-review.html': 'review'}
+CARD = {'biz': 'cardBiz', 'family': 'cardFamily', 'helium': 'cardHelium', 'flower': 'cardFlower', 'print': 'cardPrint', 'rental': 'cardRental', 'review': 'cardReview'}
+GAL = {'biz': 'galBiz', 'sch': 'galSch', 'fam': 'galFam', 'wrt': 'galWrt', 'flw': 'galFlw', 'hel': 'galHel', 'prt': 'galPrint', 'rnt': 'galRental', 'rev': 'galReview'}
+GLABEL = {'biz': '기업 · 관공서', 'sch': '학교 · 유치원', 'fam': '돌잔치 · 개인', 'wrt': '벌룬화환', 'flw': '자이언트플라워', 'hel': '헬륨 · 레터링', 'prt': '폼보드 · 실사물', 'rnt': '행사장비', 'rev': '연예인 서포트'}
+FULL = {'biz': '기업 · 관공서 · 학교행사', 'family': '돌잔치 · 개인행사', 'helium': '헬륨 · 인쇄 · 레터링풍선', 'flower': '자이언트플라워 · 꽃풍선 · 벌룬화환', 'print': '폼보드 · 포맥스 · 실사물', 'rental': '행사장비 렌탈', 'review': '연예인 서포트 후기'}
+NAVL = {'review': '서포트 후기'}
+SHORT = {'review': '연예인 서포트 후기', 'biz': '기업 · 학교 행사', 'family': '돌잔치 · 개인행사', 'helium': '헬륨 · 레터링', 'flower': '꽃풍선 · 벌룬화환', 'print': '폼보드 · 실사물', 'rental': '행사장비 렌탈'}
 MAX_EDGE = 1600
 
 def real(c, n): return 'assets/real/%s/%03d.jpg' % (c, n)
@@ -57,6 +58,7 @@ for f, c, n in svc_src:
     k = KEY[f]
     if k == 'rental': c, n = 'rnt', 1
     image_slot(CARD[k], '서비스 카드 · %s' % FULL[k], (c, int(n)), FULL[k])
+image_slot('cardReview', '서비스 카드 · 연예인 서포트 후기', ('rev', 4), '연예인 서포트 후기')
 strip_src = re.findall(r'assets/real/(\w+)/t/(\d+)\.jpg', re.search(r'<section class="strip".*?</section>', F, re.S).group(0))
 strip_seen = []
 for c, n in strip_src:
@@ -80,7 +82,7 @@ seed['works'] = [{'file': w['file'], 'title': w['title'], 'desc': w['desc'], 'ki
 PRINT_ROWS = [(x[0], x[1], x[2] if len(x) > 2 else '') for x in fp.PRINT]
 RENT_ROWS = [(x[0], x[1], x[2] if len(x) > 2 else '') for x in fp.RENTAL]
 GALLERIES = {'biz': [('biz', rows('biz')), ('sch', rows('sch'))], 'family': [('fam', rows('fam'))], 'helium': [('hel', rows('hel'))],
-             'flower': [('wrt', rows('wrt')), ('flw', rows('flw'))], 'print': [('prt', PRINT_ROWS)], 'rental': [('rnt', RENT_ROWS)]}
+             'flower': [('wrt', rows('wrt')), ('flw', rows('flw'))], 'print': [('prt', PRINT_ROWS)], 'rental': [('rnt', RENT_ROWS)], 'review': [('rev', rows('rev'))]}
 sections = [{'key': 'home', 'label': '메인 화면 사진', 'fields': ['heroSlides'] + [CARD[k] for k in CARD] + ['strip']}, {'key': 'works', 'label': '시공 사례', 'fields': ['works']}]
 for p in PAGES:
     k = KEY[p['slug']]; sec = []
@@ -142,7 +144,7 @@ HEADER = '''<header class="hdr" data-header>
   </div>
 </header>
 ''' + QUICK
-HEADER = HEADER.replace('NAV_ITEMS', ''.join('<li><a href="{{link "/%s"}}" data-nav>%s</a></li>' % (k, FULL[k]) for k in FULL) + '<li><a href="{{link "/contact"}}" data-nav>상담문의</a></li>')
+HEADER = HEADER.replace('NAV_ITEMS', ''.join('<li><a href="{{link "/%s"}}" data-nav>%s</a></li>' % (k, NAVL.get(k, FULL[k])) for k in FULL) + '<li><a href="{{link "/contact"}}" data-nav>상담문의</a></li>')
 FOOTER = '''<footer>
   <div class="wrap">
     <img src="{{asset "img/logo-pink.png"}}" alt="소로롱">
@@ -318,8 +320,11 @@ popup = '''{{#if content.popupOn}}{{#if content.popupImage}}<div class="popup" d
     <div class="popup__foot"><button type="button" data-popup-today>오늘 하루 보지 않기</button><button type="button" data-popup-close>닫기</button></div>
   </div>
 </div>{{/if}}{{/if}}'''
+rev_sec = re.search(r'<section class="reviews".*?</section>', F, re.S).group(0)
+rev_sec = re.sub(r'<div class="ggrid rgrid reveal" data-delay="2">.*?</div>', '<div class="ggrid rgrid reveal" data-delay="2">{{#each content.galReview}}<a href="{{link "/review"}}"><img src="{{image image}}" alt="{{alt image "연예인 서포트 현장 사진"}}" loading="lazy"></a>{{/each}}</div>', rev_sec, flags=re.S)
+rev_sec = rev_sec.replace('href="f-review.html"', 'href="{{link "/review"}}"')
 all_cats = ['biz', 'sch', 'fam', 'wrt', 'flw', 'hel', 'rnt']
-pages_out['index.html'] = page('\n\n'.join([hero_html, trust, link(svc), wk, strip, gallery('현장 사진 모음', '소로롱이 직접 꾸민 현장 사진을 분류별로 모았습니다. 사진을 누르면 크게 볼 수 있어요.', all_cats), faq_home, contact_home, popup]))
+pages_out['index.html'] = page('\n\n'.join([hero_html, trust, link(svc), wk, strip, gallery('현장 사진 모음', '소로롱이 직접 꾸민 현장 사진을 분류별로 모았습니다. 사진을 누르면 크게 볼 수 있어요.', all_cats), rev_sec, faq_home, contact_home, popup]))
 
 def intro(p, k):
     incl = ''.join('<li>%s</li>' % x for x in p['incl'])
@@ -403,10 +408,11 @@ DESC = {'biz': '소로롱은 기업 시상식과 기념식, 매장 오픈과 브
         'helium': '소로롱은 헬륨풍선과 로고 인쇄 풍선, 문구를 넣은 레터링 풍선을 행사 규모에 맞춰 제작하고 현장 세팅까지 맡습니다.',
         'flower': '소로롱은 자이언트플라워와 꽃풍선, 벌룬화환을 제작해 개업과 전시, 축하 행사의 공간을 화사하게 연출합니다.',
         'print': '소로롱은 폼보드와 포맥스, 실사 출력물을 제작해 포토월과 안내물, 캐릭터 조형을 풍선 장식과 함께 준비합니다.',
+        'review': '소로롱이 연예인 생일과 촬영장 응원, 팬 서포트로 제작한 꽃풍선과 풍선 꽃다발, 커피차와 푸드트럭 장식 사진을 모았습니다. 단체 주문과 문구 제작도 상담할 수 있습니다.',
         'rental': '소로롱은 레드카펫과 천막, 트러스 포토존, 무대조명, 음향장비와 감독, 행사 인력 섭외까지 풍선 장식과 함께 행사 장비를 일괄 준비합니다.'}
 for p in PAGES:
     k = KEY[p['slug']]
-    PAGE_META.append({'path': '/' + k, 'file': k + '.html', 'title': '%s | 소로롱 이벤트&벌룬' % FULL[k], 'menuLabel': FULL[k], 'description': DESC[k]})
+    PAGE_META.append({'path': '/' + k, 'file': k + '.html', 'title': '%s | 소로롱 이벤트&벌룬' % FULL[k], 'menuLabel': NAVL.get(k, FULL[k]), 'description': DESC[k]})
 PAGE_META.append({'path': '/contact', 'file': 'contact.html', 'title': '상담문의 | 소로롱 이벤트&벌룬', 'menuLabel': '상담문의', 'description': '행사 날짜와 장소, 원하는 분위기를 남겨주시면 소로롱이 어울리는 풍선 연출과 견적을 제안드립니다. 카카오톡과 전화, 상담 접수 폼으로 문의할 수 있습니다.'})
 PAGE_META.append({'path': '/privacy', 'file': 'privacy.html', 'title': '개인정보 처리방침 | 소로롱 이벤트&벌룬', 'menu': False, 'description': '소로롱 이벤트&벌룬이 상담 신청을 처리하며 수집하는 개인정보의 항목, 이용 목적, 보유 기간과 보호책임자를 안내합니다.'})
 site = {

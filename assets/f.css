@@ -16,7 +16,7 @@ body{font-size:16px}
 .menu-btn span{position:absolute;left:9px;right:9px;height:1.5px;background:var(--ink);top:14px}
 .menu-btn span+span{top:20px}.menu-btn span+span+span{top:26px}
 @media (max-width:1180px){.nav ul{gap:18px;font-size:13.5px}}
-@media (max-width:1000px){
+@media (max-width:1320px){
   .nav{position:fixed;inset:0;z-index:55;background:#fff;display:flex;align-items:center;justify-content:center;padding:64px 0 40px;overflow-y:auto;opacity:0;pointer-events:none;transition:opacity .35s}
   .nav.open{opacity:1;pointer-events:auto}
   .nav ul{flex-direction:column;gap:20px;text-align:center;font-size:22px;font-weight:400}
@@ -28,8 +28,9 @@ body{font-size:16px}
   .menu-btn[aria-expanded=true] span+span{opacity:0}
   .menu-btn[aria-expanded=true] span+span+span{opacity:1;transform:rotate(-45deg)}
   .cta{display:none}
-  .hdr .wrap{height:64px}
 }
+@media (max-width:1000px){.hdr .wrap{height:64px}}
+@media (min-width:1321px) and (max-width:1560px){.nav ul{gap:18px;font-size:13.5px}}
 /* 오른쪽 고정 버튼 */
 .quick{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:45;display:flex;flex-direction:column;background:#fff;border-radius:18px;box-shadow:0 10px 40px -10px rgba(0,0,0,.25);overflow:hidden;border:1px solid var(--line)}
 .quick a{display:flex;flex-direction:column;align-items:center;gap:6px;width:76px;padding:14px 0 12px;font-size:11.5px;font-weight:600;color:#333;border-bottom:1px solid var(--line);transition:background .25s}
@@ -195,3 +196,11 @@ footer{padding:44px 0 120px;font-size:13.5px;color:var(--mute)}
 footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;align-items:center}
 footer img{height:22px;width:auto;opacity:.9}
 @media (min-width:1001px){footer{padding-bottom:60px}}
+
+/* 서포트 후기(메인) */
+.reviews{background:#fafaf9}
+.rgrid a:nth-child(n+13){display:none}
+.rmore{margin-top:28px;text-align:center}
+.rmore a{display:inline-block;padding:14px 30px;border-radius:999px;border:1px solid var(--ink);font-size:14.5px;font-weight:600;transition:.25s}
+.rmore a:hover{background:var(--ink);color:#fff}
+@media (max-width:640px){.rgrid a:nth-child(n+10){display:none}}

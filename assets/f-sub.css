@@ -71,3 +71,7 @@
 .others .row:has(> :nth-child(6)){grid-template-columns:repeat(6,1fr)}
 @media (max-width:1000px){.others .row:has(> :nth-child(6)){grid-template-columns:repeat(3,1fr)}}
 @media (max-width:560px){.others .row:has(> :nth-child(6)){grid-template-columns:1fr 1fr}}
+.others .row:has(> :nth-child(7)){grid-template-columns:repeat(7,1fr)}
+.others .row:has(> :nth-child(7)) span{font-size:13.5px}
+@media (max-width:1000px){.others .row:has(> :nth-child(7)){grid-template-columns:repeat(3,1fr)}}
+@media (max-width:560px){.others .row:has(> :nth-child(7)){grid-template-columns:1fr 1fr}}
