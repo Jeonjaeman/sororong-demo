@@ -52,7 +52,7 @@ def rows(cat): return [(c, n, CAPS.get('%s/%d' % (c, n), '')) for c, n in ORD['o
 # 메인
 hero_src = re.findall(r'<div class="slide(?: on)?"><img src="assets/real/(\w+)/(\d+)\.jpg" alt="([^"]*)"', F)
 hero = [(c, int(n), a) for c, n, a in hero_src]
-photos('heroSlides', '메인 슬라이드 사진', hero, 8, '첫 화면에 크게 돌아가는 사진입니다(권장 2~5장). 가로로 긴 사진이 잘 어울립니다.')
+photos('heroSlides', '메인 슬라이드 사진', hero, 12, '첫 화면에 크게 돌아가는 사진입니다. 12장까지 넣을 수 있고, 가로로 긴 사진이 잘 어울립니다.')
 svc_src = re.findall(r'<a class="svc reveal"[^>]*href="(f-\w+\.html)"><img src="assets/real/(\w+)/(\d+)\.jpg"', F)
 for f, c, n in svc_src:
     k = KEY[f]
@@ -114,7 +114,7 @@ for key, schema in [
 ]: add(key, schema)
 add('stats', {'type': 'list', 'label': '실적 숫자', 'maxItems': 4, 'minItems': 1, 'itemLabelField': 'label', 'item': {'order': ['value', 'suffix', 'label'], 'fields': {
     'value': {'type': 'text', 'label': '숫자', 'maxLength': 10, 'required': True}, 'suffix': {'type': 'text', 'label': '단위', 'maxLength': 6}, 'label': {'type': 'text', 'label': '설명', 'maxLength': 30, 'required': True}}}})
-add('clients', {'type': 'list', 'label': '함께한 고객사', 'maxItems': 60, 'itemLabelField': 'name', 'help': '메인 화면에서 옆으로 흐르는 이름입니다.', 'item': {'order': ['name'], 'fields': {'name': {'type': 'text', 'label': '이름', 'maxLength': 40, 'required': True}}}})
+add('clients', {'type': 'list', 'label': '함께한 고객사', 'maxItems': 60, 'itemLabelField': 'name', 'help': '메인 화면에서 옆으로 흐릅니다. 로고를 넣으면 이름 대신 로고가 보입니다.', 'item': {'order': ['name', 'logo'], 'fields': {'name': {'type': 'text', 'label': '이름', 'maxLength': 40, 'required': True}, 'logo': {'type': 'image', 'label': '로고(선택)', 'maxEdge': 600}}}})
 add('faq', {'type': 'list', 'label': '자주 묻는 질문', 'maxItems': 20, 'itemLabelField': 'question', 'item': {'order': ['question', 'answer'], 'fields': {
     'question': {'type': 'text', 'label': '질문', 'maxLength': 120, 'required': True}, 'answer': {'type': 'text', 'label': '답변', 'maxLength': 400, 'required': True}}}})
 sections.append({'key': 'settings', 'label': '연락처 · 실적', 'fields': ['phone', 'kakaoUrl', 'instagramUrl', 'address', 'bizInfo', 'privacyOwner', 'stats', 'clients', 'faq']})
@@ -273,7 +273,7 @@ trust = re.sub(r'<div class="stat-grid">.*?</div>\s*</div>\s*<div class="clients
       </div>
     </div>
     <div class="clients">''', trust, flags=re.S)
-trust = re.sub(r'<div class="marquee__track">.*?</div>', '<div class="marquee__track">{{#each content.clients}}<span>{{name}}</span>{{/each}}</div>', trust, flags=re.S)
+trust = re.sub(r'<div class="marquee__track">.*?</div>', '<div class="marquee__track">{{#each content.clients}}{{#if logo}}<img class="client-logo" src="{{image logo}}" alt="{{name}}" loading="lazy">{{else}}<span>{{name}}</span>{{/if}}{{/each}}</div>', trust, flags=re.S)
 svc = sec('svc-sec') if False else re.search(r'<section[^>]*>\s*<div class="wrap">\s*<div class="eyebrow reveal">Services</div>.*?</section>', F, re.S).group(0)
 for f, k in KEY.items():
     svc = re.sub(r'href="%s"><img src="[^"]+" alt="" loading="lazy">' % re.escape(f), lambda m: 'href="{{link "/%s"}}">%s' % (k, slot(CARD[k], alt=FULL[k])), svc)
@@ -431,7 +431,7 @@ site = {
         'name': '소로롱 이벤트&벌룬', 'telephone': '{{content.phone}}', 'address': {'@type': 'PostalAddress', 'streetAddress': '{{content.address}}', 'addressRegion': '경기도', 'addressCountry': 'KR'}, 'areaServed': '서울 · 경기 · 전국 출장', 'sameAs': ['{{content.instagramUrl}}', '{{content.kakaoUrl}}']}},
         'summary': '소로롱 이벤트&벌룬은 경기 광주를 기반으로 기업 시상식과 기념식, 브랜드 팝업, 관공서와 학교 행사, 돌잔치의 포토존과 풍선 공간 연출을 디자인부터 설치와 철거까지 직접 맡는 풍선 이벤트 업체입니다.',
         'facts': ['서비스: 기업 · 관공서 · 학교행사, 돌잔치 · 개인행사, 헬륨 · 인쇄 · 레터링풍선, 자이언트플라워 · 꽃풍선 · 벌룬화환, 폼보드 · 포맥스 · 실사물, 행사장비 렌탈.', '서비스 지역: 서울 · 경기 중심, 전국 출장 설치 가능.'],
-        'faq': {'content': 'faq', 'question': 'question', 'answer': 'answer', 'page': '/'}, 'favicon': 'img/mark-pink.svg'},
+        'faq': {'content': 'faq', 'question': 'question', 'answer': 'answer', 'page': '/'}, 'favicon': 'img/mark-pink.svg', 'ogImage': 'img/og.png'},
     'csp': {'styleSrc': ['https://cdn.jsdelivr.net', 'https://fonts.googleapis.com'], 'fontSrc': ['https://cdn.jsdelivr.net', 'https://fonts.gstatic.com']},
 }
 
@@ -449,6 +449,7 @@ css = ''.join(imports) + re.sub(r"@import url\([^)]*\);\n", '', css) + io.open(o
 w(TPL + '/css/site.css', css)
 shutil.copy(os.path.join(ROOT, 'tools/cms_site.js'), TPL + '/js/site.js')
 for n in ('logo-pink.png', 'mark-white.svg', 'mark-pink.svg'): shutil.copy(os.path.join(ROOT, 'assets/logo', n), TPL + '/img/' + n)
+shutil.copy(os.path.join(ROOT, 'assets/og/og.png'), TPL + '/img/og.png')
 def webp(src, dst, edge=1280, q=72):
     im = ImageOps.exif_transpose(Image.open(os.path.join(ROOT, src))).convert('RGB'); im.thumbnail((edge, edge), Image.LANCZOS); im.save(dst, 'WEBP', quality=q, method=6)
 for field, src in fallbacks.items(): webp(src, '%s/img/%s.webp' % (TPL, field))

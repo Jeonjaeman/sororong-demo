@@ -25,3 +25,4 @@ footer a{text-decoration:underline}
 .popup__foot button{flex:1;min-height:50px;font-size:14px;color:#444}
 .popup__foot button+button{border-left:1px solid var(--line);font-weight:600;color:var(--ink)}
 @media (max-width:1000px){main .policy{padding:104px 0 70px}[data-doc]{padding:104px 0 70px}}
+.marquee__track .client-logo{height:40px;width:auto;object-fit:contain;flex:none}

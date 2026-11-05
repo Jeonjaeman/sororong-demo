@@ -2434,5 +2434,125 @@
 "n": 11,
 "dup": false,
 "src": "kakao_20261105"
+},
+{
+"c": "biz",
+"n": 144,
+"dup": false,
+"src": "kakao_20261105b"
+},
+{
+"c": "fam",
+"n": 19,
+"dup": false,
+"src": "kakao_20261105b"
+},
+{
+"c": "biz",
+"n": 145,
+"dup": false,
+"src": "kakao_20261105b"
+},
+{
+"c": "fam",
+"n": 20,
+"dup": false,
+"src": "kakao_20261105b"
+},
+{
+"c": "biz",
+"n": 146,
+"dup": false,
+"src": "kakao_20261105b"
+},
+{
+"c": "fam",
+"n": 21,
+"dup": false,
+"src": "kakao_20261105b"
+},
+{
+"c": "flw",
+"n": 6,
+"dup": false,
+"src": "kakao_20261105b"
+},
+{
+"c": "fam",
+"n": 22,
+"dup": false,
+"src": "kakao_20261105b"
+},
+{
+"c": "flw",
+"n": 7,
+"dup": false,
+"src": "kakao_20261105b"
+},
+{
+"c": "wrt",
+"n": 17,
+"dup": false,
+"src": "kakao_20261105b"
+},
+{
+"c": "flw",
+"n": 8,
+"dup": false,
+"src": "kakao_20261105b"
+},
+{
+"c": "hel",
+"n": 12,
+"dup": false,
+"src": "kakao_20261105b"
+},
+{
+"c": "hel",
+"n": 13,
+"dup": false,
+"src": "kakao_20261105b"
+},
+{
+"c": "fam",
+"n": 23,
+"dup": false,
+"src": "kakao_20261105b"
+},
+{
+"c": "hel",
+"n": 14,
+"dup": false,
+"src": "kakao_20261105b"
+},
+{
+"c": "biz",
+"n": 147,
+"dup": false,
+"src": "kakao_20261105b"
+},
+{
+"c": "fam",
+"n": 24,
+"dup": false,
+"src": "kakao_20261105b"
+},
+{
+"c": "hel",
+"n": 15,
+"dup": false,
+"src": "kakao_20261105b"
+},
+{
+"c": "fam",
+"n": 25,
+"dup": false,
+"src": "kakao_20261105b"
+},
+{
+"c": "hel",
+"n": 16,
+"dup": false,
+"src": "kakao_20261105b"
 }
 ]
